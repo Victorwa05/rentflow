@@ -6,6 +6,7 @@
 <title>RentFlow — Smart Property Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="supabase.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -651,74 +652,75 @@ html{height:100%}body{min-height:100%;font-family:var(--sans);background:var(--b
 .vacant-drill-row:last-child{border-bottom:none}
 
 /* ── KRA TAX MODULE ── */
-.kra-hero{background:linear-gradient(135deg,#1a2a1a,#0F3D20);border-radius:var(--rxl);padding:26px 28px;margin-bottom:20px;position:relative;overflow:hidden}
-.kra-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04)}
-.kra-hero::after{content:'KRA';position:absolute;right:28px;bottom:16px;font-family:var(--serif);font-size:80px;font-weight:700;color:rgba(255,255,255,.04);letter-spacing:-2px;line-height:1}
-.kra-hero-inner{position:relative;z-index:1;display:flex;align-items:flex-start;gap:16px}
-.kra-logo{width:48px;height:48px;background:rgba(255,255,255,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#7dd87d;flex-shrink:0}
-.kra-title{font-family:var(--serif);font-size:20px;font-weight:300;color:white;letter-spacing:-.3px}
-.kra-sub{font-size:13px;color:rgba(255,255,255,.6);margin-top:3px;line-height:1.5}
-.kra-year-sel{margin-left:auto;display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0}
-.kra-yr-lbl{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.4px}
-.kra-yr-dd{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:7px 12px;font-size:13px;font-family:var(--sans);cursor:pointer;outline:none}
-.kra-yr-dd option{background:#1a2a1a}
 
-.kra-alert{border-radius:var(--r);padding:12px 15px;margin-bottom:14px;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
-.kra-alert i{font-size:16px;flex-shrink:0;margin-top:1px}
-.kra-alert-warn{background:#FAEEDA;color:#633806;border:.5px solid #FAC775}
-.kra-alert-info{background:var(--blue-l);color:var(--blue-d);border:.5px solid #8EC3F5}
-.kra-alert-ok{background:var(--green-l);color:var(--green-d);border:.5px solid #C0DD97}
 
-.kra-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
-.kra-card{background:var(--sf);border:.5px solid var(--bd);border-radius:var(--rl);padding:18px;box-shadow:var(--sh)}
-.kra-card-title{font-size:13px;font-weight:500;display:flex;align-items:center;gap:7px;margin-bottom:14px;color:var(--tx)}
-.kra-card-title i{font-size:15px;color:var(--teal)}
-.kra-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:.5px solid var(--bd);font-size:13px}
-.kra-row:last-child{border-bottom:none}
-.kra-row-lbl{color:var(--tx2)}
-.kra-row-val{font-weight:500;color:var(--tx)}
-.kra-row-val.highlight{color:var(--teal-d);font-size:15px}
-.kra-row-val.tax{color:var(--coral-d)}
-.kra-row-val.deduct{color:var(--green-d)}
-.kra-divider-row{background:var(--gray-50);margin:6px -18px;padding:8px 18px;display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px}
 
-.kra-monthly-bar{display:flex;align-items:center;gap:8px;margin-bottom:7px}
-.kra-bar-lbl{font-size:11px;color:var(--tx2);width:68px;flex-shrink:0;text-align:right}
-.kra-bar-track{flex:1;background:var(--gray-100);border-radius:3px;height:20px;overflow:hidden;position:relative}
-.kra-bar-fill{height:100%;border-radius:3px;background:var(--teal);display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:500;color:white;transition:width .4s}
-.kra-bar-fill.partial{background:var(--amber)}
-.kra-bar-val{font-size:11px;color:var(--tx2);width:90px;text-align:right;flex-shrink:0}
 
-.kra-step{display:flex;gap:14px;padding:14px 0;border-bottom:.5px solid var(--bd)}
-.kra-step:last-child{border-bottom:none}
-.kra-step-num{width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.kra-step-title{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:3px}
-.kra-step-body{font-size:12px;color:var(--tx2);line-height:1.6}
-.kra-step-link{display:inline-flex;align-items:center;gap:4px;background:var(--teal);color:white;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;margin-top:7px;transition:background .15s}
-.kra-step-link:hover{background:var(--teal-d)}
-.kra-step-link-ghost{display:inline-flex;align-items:center;gap:4px;background:transparent;color:var(--teal-d);border:.5px solid var(--teal-m);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);text-decoration:none;margin-top:7px;margin-left:6px;transition:all .15s}
-.kra-step-link-ghost:hover{background:var(--teal-l)}
 
-.kra-download-bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.kra-dl-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all .15s;border:.5px solid var(--bd)}
-.kra-dl-btn:hover{border-color:var(--teal-m);background:var(--teal-l)}
-.kra-dl-primary{background:var(--teal);color:white;border-color:var(--teal)}
-.kra-dl-primary:hover{background:var(--teal-d)!important;border-color:var(--teal-d)!important}
 
-.kra-pin-box{background:var(--gray-50);border:.5px solid var(--bd);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-top:12px}
-.kra-pin-icon{width:34px;height:34px;background:var(--teal-l);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--teal-d);flex-shrink:0}
 
-.kra-tab-bar{display:flex;gap:0;border-bottom:.5px solid var(--bd);margin-bottom:18px}
-.kra-tab{padding:9px 16px;font-size:13px;font-weight:400;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--sans)}
-.kra-tab:hover{color:var(--tx)}
-.kra-tab.on{color:var(--teal-d);font-weight:500;border-bottom-color:var(--teal)}
-.kra-section{display:none}
-.kra-section.on{display:block}
 
 @media(max-width:600px){
-  .kra-grid{grid-template-columns:1fr}
-  .kra-hero-inner{flex-direction:column;gap:12px}
-  .kra-year-sel{align-items:flex-start}
+}
+
+/* ── CREDENTIALS MODAL ── */
+.cred-box{background:#0f1117;border:1px solid rgba(29,158,117,.3);border-radius:var(--rl);padding:18px;margin:14px 0}
+.cred-header{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;color:#5DCAA5;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.cred-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.cred-row:last-child{border:none}
+.cred-lbl{font-size:11px;color:rgba(255,255,255,.4);width:80px;flex-shrink:0}
+.cred-val{font-family:monospace;font-size:13px;color:white;font-weight:500;letter-spacing:.5px;flex:1}
+.cred-copy{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.cred-copy:hover{background:rgba(29,158,117,.25);color:#5DCAA5}
+.cred-warn{background:rgba(186,117,23,.1);color:#FAC775;border:.5px solid rgba(186,117,23,.3);border-radius:8px;padding:10px 13px;font-size:12px;line-height:1.6;display:flex;gap:8px;align-items:flex-start;margin-top:12px}
+.cred-note{background:rgba(29,158,117,.08);color:#5DCAA5;border:.5px solid rgba(29,158,117,.2);border-radius:8px;padding:10px 13px;font-size:12px;line-height:1.6;margin-top:10px}
+.otp-badge{background:var(--teal-l);color:var(--teal-d);border:.5px solid var(--teal-m);border-radius:8px;padding:8px 13px;font-size:12px;display:flex;align-items:center;gap:7px;margin-top:10px}
+.dev-only-badge{background:rgba(216,90,48,.12);color:#F0997B;border:.5px solid rgba(216,90,48,.3);border-radius:6px;padding:2px 9px;font-size:10px;font-weight:500}
+
+/* -- EXPENDITURES MODULE -- */
+.exp-hero{background:linear-gradient(135deg,#1C2A3A,#0F1E2E);border-radius:var(--rxl);padding:22px 26px;margin-bottom:18px;position:relative;overflow:hidden}
+.exp-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04)}
+.exp-hero-inner{position:relative;z-index:1;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.exp-hero-ic{width:44px;height:44px;background:rgba(255,255,255,.1);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#85B7EB;flex-shrink:0}
+.exp-hero-title{font-family:var(--serif);font-size:19px;font-weight:300;color:white}
+.exp-hero-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:3px;line-height:1.5}
+.exp-yr-dd{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 11px;font-size:12px;font-family:var(--sans);cursor:pointer;outline:none}
+.exp-yr-dd option{background:#1C2A3A;color:white}
+.exp-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:18px}
+.exp-sum-card{background:var(--sf);border:.5px solid var(--bd);border-radius:var(--rl);padding:14px 16px;box-shadow:var(--sh)}
+.exp-sum-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--tx2);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.exp-sum-val{font-size:22px;font-weight:300;font-family:var(--serif);color:var(--tx);line-height:1}
+.exp-sum-sub{font-size:11px;color:var(--tx3);margin-top:4px}
+.exp-tabs{display:flex;gap:0;border-bottom:.5px solid var(--bd);margin-bottom:18px;overflow-x:auto}
+.exp-tab{padding:9px 16px;font-size:13px;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--sans);white-space:nowrap;flex-shrink:0}
+.exp-tab:hover{color:var(--tx)}
+.exp-tab.on{color:var(--teal-d);font-weight:500;border-bottom-color:var(--teal)}
+.exp-section{display:none}
+.exp-section.on{display:block}
+.exp-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:11px;margin-bottom:18px}
+.exp-cat-card{background:var(--sf);border:.5px solid var(--bd);border-radius:var(--rl);padding:14px;cursor:pointer;transition:all .18s;box-shadow:var(--sh)}
+.exp-cat-card:hover{border-color:var(--bd2);transform:translateY(-2px)}
+.exp-cat-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:9px}
+.exp-cat-name{font-size:12px;font-weight:500;color:var(--tx);margin-bottom:2px}
+.exp-cat-amt{font-size:15px;font-weight:500;font-family:var(--serif)}
+.exp-cat-sub{font-size:11px;color:var(--tx3);margin-top:2px}
+.exp-bar-track{height:4px;background:var(--gray-100);border-radius:3px;margin-top:8px;overflow:hidden}
+.exp-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:.5px solid var(--bd);font-size:13px}
+.exp-item:last-child{border:none}
+.exp-item-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.exp-item-name{flex:1;font-weight:500;color:var(--tx)}
+.exp-item-sub{font-size:11px;color:var(--tx3)}
+.exp-item-amt{font-size:14px;font-weight:500;color:var(--tx);text-align:right;flex-shrink:0}
+.exp-receipt-badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+.rec-yes{background:var(--green-l);color:var(--green-d)}
+.rec-no{background:var(--gray-100);color:var(--tx3)}
+.exp-total-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:.5px solid var(--bd);font-size:13px}
+.exp-total-row:last-child{border:none}
+.exp-profit{background:var(--green-l);border:.5px solid #C0DD97;border-radius:var(--r);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.exp-loss{background:var(--coral-l);border:.5px solid #F0997B;border-radius:var(--r);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+@media(max-width:600px){
+  .exp-summary-grid{grid-template-columns:1fr 1fr}
+  .exp-cat-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -989,10 +991,11 @@ html{height:100%}body{min-height:100%;font-family:var(--sans);background:var(--b
       </div>
 
 
-      <!-- LANDLORD: KRA TAX -->
-      <div class="tsec" id="ts-tax">
-        <div id="kra-content"><!-- rendered by JS --></div>
+      <!-- LANDLORD: EXPENDITURES -->
+      <div class="tsec" id="ts-expenses">
+        <div id="exp-content"><!-- rendered by JS --></div>
       </div>
+
 
       <!-- TENANT PORTAL -->
       <div class="tsec" id="ts-portal">
@@ -1184,6 +1187,71 @@ html{height:100%}body{min-height:100%;font-family:var(--sans);background:var(--b
   </div>
 </div>
 
+
+<!-- ══ EDIT TENANT MODAL ══ -->
+<div class="ov" id="ov-editTenant">
+  <div class="modal wide">
+    <div class="mhd"><span class="mtitle" id="et-title">Edit Tenant Details</span><button class="ib" onclick="closeM('editTenant')"><i class="ti ti-x"></i></button></div>
+    <div class="ok-al" id="et-ok"><i class="ti ti-check"></i> Tenant details updated and saved.</div>
+    <div class="sec-lbl" style="margin-bottom:10px">You can edit any detail. Changes are saved immediately.</div>
+    <div class="fgrid">
+      <div><label class="fl">Full Name</label><input class="fi" type="text" id="et-name" placeholder="Full name"></div>
+      <div><label class="fl">Phone Number</label><input class="fi" type="tel" id="et-phone" placeholder="+254 700 000 000"></div>
+    </div>
+    <div class="fgrid">
+      <div><label class="fl">Email</label><input class="fi" type="email" id="et-email" placeholder="tenant@email.com"></div>
+      <div><label class="fl">ID / Passport No.</label><input class="fi" type="text" id="et-idno" placeholder="ID number"></div>
+    </div>
+    <hr class="divider">
+    <div class="sec-lbl">Employment</div>
+    <div class="fgrid">
+      <div><label class="fl">Employment Type</label>
+        <select class="fi" id="et-emp">
+          <option value="Employed">Employed (Salaried)</option>
+          <option value="Self-Employed">Self-Employed</option>
+          <option value="Business Owner">Business Owner</option>
+          <option value="Freelancer">Freelancer / Contractor</option>
+          <option value="Student">Student</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div><label class="fl">Employer / Business</label><input class="fi" type="text" id="et-employer" placeholder="Employer or business name"></div>
+    </div>
+    <div class="fgrid">
+      <div><label class="fl">Monthly Income (KES)</label><input class="fi" type="number" id="et-income" placeholder="e.g. 60000"></div>
+      <div><label class="fl">Business / Industry Type</label><input class="fi" type="text" id="et-biztype" placeholder="e.g. Retail, Banking"></div>
+    </div>
+    <hr class="divider">
+    <div class="sec-lbl">Rent & Deposit</div>
+    <div class="fgrid">
+      <div><label class="fl">Monthly Rent (KES)</label><input class="fi" type="number" id="et-rent" placeholder="e.g. 24000"></div>
+      <div><label class="fl">Rent Due Day</label>
+        <select class="fi" id="et-due">
+          <option value="1">1st</option><option value="3">3rd</option>
+          <option value="5">5th</option><option value="10">10th</option>
+          <option value="15">15th</option><option value="20">20th</option>
+          <option value="25">25th</option><option value="28">28th</option>
+        </select>
+      </div>
+    </div>
+    <div class="fgrid">
+      <div><label class="fl">Deposit Status</label>
+        <select class="fi" id="et-dep">
+          <option value="paid">Deposit Paid</option>
+          <option value="pending">Deposit Pending</option>
+          <option value="waived">Deposit Waived</option>
+        </select>
+      </div>
+      <div><label class="fl">Deposit Amount (KES)</label><input class="fi" type="number" id="et-depamt" placeholder="e.g. 24000"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="fi" id="et-notes" rows="2" style="resize:none" placeholder="Any notes about this tenant..."></textarea></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+      <button class="btn-g" onclick="closeM('editTenant')">Cancel</button>
+      <button class="btn-f" style="margin:0" onclick="saveEditTenant()"><i class="ti ti-check"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ EDIT BUILDING MODAL ══ -->
 <div class="ov" id="ov-editBuilding">
   <div class="modal">
@@ -1225,9 +1293,195 @@ html{height:100%}body{min-height:100%;font-family:var(--sans);background:var(--b
   <div class="drill-body" id="drill-body"></div>
 </div>
 
+
+<!-- ══ TENANT CREDENTIALS MODAL ══ -->
+<div class="ov" id="ov-tenantCreds">
+  <div class="modal">
+    <div class="mhd">
+      <div>
+        <div class="mtitle">Tenant Account Created</div>
+        <div style="font-size:12px;color:var(--tx2);margin-top:2px">Share these login credentials with the tenant</div>
+      </div>
+      <button class="ib" onclick="closeM('tenantCreds')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="cred-box">
+      <div class="cred-header"><i class="ti ti-key"></i> Login Credentials</div>
+      <div class="cred-row">
+        <span class="cred-lbl">Name</span>
+        <span class="cred-val" id="tc-name">—</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-lbl">Email</span>
+        <span class="cred-val" id="tc-email">—</span>
+        <button class="cred-copy" onclick="copyVal('tc-email','Email')">Copy</button>
+      </div>
+      <div class="cred-row">
+        <span class="cred-lbl">Password</span>
+        <span class="cred-val" id="tc-pass" style="color:#5DCAA5">—</span>
+        <button class="cred-copy" onclick="copyVal('tc-pass','Password')">Copy</button>
+      </div>
+      <div class="cred-row">
+        <span class="cred-lbl">Unit</span>
+        <span class="cred-val" id="tc-unit">—</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-lbl">App Link</span>
+        <span class="cred-val" id="tc-link" style="font-size:11px;color:rgba(255,255,255,.6)">—</span>
+        <button class="cred-copy" onclick="copyVal('tc-link','Link')">Copy</button>
+      </div>
+      <div class="cred-warn">
+        <i class="ti ti-alert-triangle" style="font-size:15px;flex-shrink:0;margin-top:1px"></i>
+        <div>This is a <strong>one-time password (OTP)</strong>. It will not be shown again. Send it to the tenant via SMS or WhatsApp right now. The tenant must change it after first login.</div>
+      </div>
+      <div class="cred-note">
+        <i class="ti ti-device-mobile" style="font-size:13px"></i>
+        Tenant logs in at the app link above using this email and password.
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+      <button class="btn-g" onclick="closeM('tenantCreds')"><i class="ti ti-check"></i> Done</button>
+      <button class="btn-f" onclick="shareCreds()" style="margin:0"><i class="ti ti-share"></i> Copy SMS Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DEV CONFIRM PERMANENT DELETE TENANT ══ -->
+<div class="dev-modal-bg" id="dov-permDelTenant">
+  <div class="dev-modal">
+    <div class="dev-mhd">
+      <div>
+        <div class="dev-mtitle" style="color:#F0997B">Permanent Delete — Tenant</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px">Developer only — cannot be undone</div>
+      </div>
+      <button class="dev-ibt" onclick="devCloseM('permDelTenant')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="dev-warn-b">
+      <strong><i class="ti ti-skull"></i> Permanent Deletion — No Recovery</strong>
+      This deletes the tenant record, all payment history, all messages, and their login account <strong>immediately and permanently</strong>. This bypasses the 90-day retention period. Only you (the developer) can do this.
+    </div>
+    <div id="pdt-info" style="background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px"></div>
+    <div class="dev-fg">
+      <label class="dev-fl">Type DELETE to confirm</label>
+      <input class="dev-fi" type="text" id="pdt-confirm" placeholder="Type DELETE here" oninput="document.getElementById('pdt-btn').disabled=this.value!=='DELETE'">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="dev-btn-sm" style="justify-content:center;padding:9px" onclick="devCloseM('permDelTenant')">Cancel</button>
+      <button class="dev-btn-sm danger" id="pdt-btn" disabled style="justify-content:center;padding:9px;font-size:13px" onclick="execPermDelTenant()">
+        <i class="ti ti-trash"></i> Permanently Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DEV CONFIRM PERMANENT DELETE LANDLORD ══ -->
+<div class="dev-modal-bg" id="dov-permDelLandlord">
+  <div class="dev-modal">
+    <div class="dev-mhd">
+      <div>
+        <div class="dev-mtitle" style="color:#F0997B">Permanent Delete — Landlord</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px">Developer only — cannot be undone</div>
+      </div>
+      <button class="dev-ibt" onclick="devCloseM('permDelLandlord')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="dev-warn-b">
+      <strong><i class="ti ti-skull"></i> Permanent Deletion — No Recovery</strong>
+      This deletes the landlord account, all their buildings, all tenants, all payment records and login credentials <strong>permanently and immediately</strong>. This action is irreversible. Only you (the developer) can perform this.
+    </div>
+    <div id="pdl-info" style="background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px"></div>
+    <div class="dev-fg">
+      <label class="dev-fl">Type DELETE to confirm</label>
+      <input class="dev-fi" type="text" id="pdl-confirm" placeholder="Type DELETE here" oninput="document.getElementById('pdl-btn').disabled=this.value!=='DELETE'">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="dev-btn-sm" style="justify-content:center;padding:9px" onclick="devCloseM('permDelLandlord')">Cancel</button>
+      <button class="dev-btn-sm danger" id="pdl-btn" disabled style="justify-content:center;padding:9px;font-size:13px" onclick="execPermDelLandlord()">
+        <i class="ti ti-trash"></i> Permanently Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ADD EXPENSE MODAL -->
+<div class="ov" id="ov-addExpense">
+  <div class="modal">
+    <div class="mhd"><span class="mtitle">Add Expense</span><button class="ib" onclick="closeM('addExpense')"><i class="ti ti-x"></i></button></div>
+    <div class="ok-al" id="ae-ok"><i class="ti ti-check"></i> Expense recorded successfully.</div>
+    <div class="fgrid">
+      <div><label class="fl">Category *</label>
+        <select class="fi" id="ae-cat">
+          <option value="">Select category...</option>
+          <option value="water">Water Bill</option>
+          <option value="electricity">Electricity</option>
+          <option value="security">Security / Guards</option>
+          <option value="caretaker">Caretaker Salary</option>
+          <option value="repairs">Repairs & Maintenance</option>
+          <option value="agent">Agent / Management Fee</option>
+          <option value="insurance">Building Insurance</option>
+          <option value="rates">Land Rates / Council</option>
+          <option value="garbage">Garbage Collection</option>
+          <option value="internet">Internet / WiFi</option>
+          <option value="cleaning">Cleaning Services</option>
+          <option value="pest">Pest Control</option>
+          <option value="legal">Legal / Professional Fees</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div><label class="fl">Building</label>
+        <select class="fi" id="ae-bld">
+          <option value="all">All Buildings</option>
+        </select>
+      </div>
+    </div>
+    <div class="fgrid">
+      <div><label class="fl">Amount (KES) *</label><input class="fi" type="number" id="ae-amt" placeholder="e.g. 5000"></div>
+      <div><label class="fl">Date *</label><input class="fi" type="date" id="ae-date"></div>
+    </div>
+    <div class="fg"><label class="fl">Description / Notes</label><input class="fi" type="text" id="ae-desc" placeholder="e.g. Monthly water bill - Block A"></div>
+    <div class="fgrid">
+      <div><label class="fl">Paid To (Vendor)</label><input class="fi" type="text" id="ae-vendor" placeholder="e.g. Nairobi Water"></div>
+      <div><label class="fl">Receipt / Ref No.</label><input class="fi" type="text" id="ae-ref" placeholder="e.g. NW20240512"></div>
+    </div>
+    <div class="fg"><label class="fl">Receipt Uploaded?</label>
+      <div style="display:flex;gap:10px;align-items:center;padding:8px 0">
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="radio" name="ae-receipt" value="yes" id="ae-rec-yes"> Yes, I have a receipt</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="radio" name="ae-receipt" value="no" id="ae-rec-no" checked> No receipt</label>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+      <button class="btn-g" onclick="closeM('addExpense')">Cancel</button>
+      <button class="btn-f" style="margin:0" onclick="saveExpense()"><i class="ti ti-plus"></i> Add Expense</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast-el"><i class="ti ti-check"></i><span id="toast-msg"></span></div>
 
 <script>
+// ═══════════ DATABASE CONFIG ═══════════
+// Set DB_ENABLED = true once you add your Supabase keys to supabase.js
+// When false, the app runs on local data (demo mode)
+let DB_ENABLED = false;
+let DB_LANDLORD_ID = null; // set after login from DB
+
+// Try to detect if supabase.js is configured
+if(window.RF && window.RF.Auth){
+  const url = document.querySelector('script[src="supabase.js"]');
+  DB_ENABLED = false; // flip to true after adding real keys
+}
+
+// Show a banner to the developer reminding them to connect DB
+function showDbBanner(){
+  if(DB_ENABLED) return;
+  const b=document.createElement('div');
+  b.id='db-banner';
+  b.innerHTML=`<div style="background:#1a2a1a;color:#7dd87d;padding:8px 16px;font-size:12px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;position:fixed;bottom:0;left:0;right:0;z-index:500;border-top:1px solid #2d4a2d">
+    <i class="ti ti-database-off"></i> Running in demo mode — add Supabase keys to supabase.js to enable live database
+    <button onclick="document.getElementById('db-banner').remove()" style="background:transparent;border:none;color:#7dd87d;cursor:pointer;padding:0 6px;font-size:14px">×</button>
+  </div>`;
+  document.body.appendChild(b);
+}
+
 // ═══════════ DATA ═══════════
 const CREDS={
   'landlord@demo.com':{role:'landlord',pass:'landlord123',name:'John Kariuki',ini:'JK',col:'c0',lid:'ll1'},
@@ -1389,8 +1643,17 @@ function doLogin(){
   document.querySelector('.app-body').scrollTop=0;
   buildHeader();
   renderNotifs();
-  if(CU.role==='landlord'){navTo('dashboard');renderDashboard();}
-  else{navTo('portal');renderPortal();}
+  showDbBanner();
+  if(DB_ENABLED){
+    // When DB is live: load real buildings/tenants from Supabase
+    loadLandlordDataFromDB().then(()=>{
+      if(CU.role==='landlord'){navTo('dashboard');renderDashboard();}
+      else{navTo('portal');renderPortal();}
+    });
+  } else {
+    if(CU.role==='landlord'){navTo('dashboard');renderDashboard();}
+    else{navTo('portal');renderPortal();}
+  }
 }
 function doLogout(){
   CU=null;
@@ -1440,7 +1703,7 @@ function buildHeader(){
       <button class="hb" id="nb-risk" onclick="navTo('risk')"><i class="ti ti-shield-check"></i><span> Risk</span></button>
       <button class="hb" id="nb-sms" onclick="navTo('sms')"><i class="ti ti-message-2"></i><span> SMS</span></button>
       <button class="hb" id="nb-reports" onclick="navTo('reports')"><i class="ti ti-chart-bar"></i><span> Reports</span></button>
-      <button class="hb" id="nb-tax" onclick="navTo('tax')"><i class="ti ti-receipt-tax"></i><span> KRA Tax</span></button>
+      <button class="hb" id="nb-expenses" onclick="navTo('expenses')"><i class="ti ti-wallet"></i><span> Expenses</span></button>
     `;
   } else {
     nav.innerHTML=`<button class="hb on" id="nb-portal"><i class="ti ti-user-circle"></i><span> My Account</span></button>`;
@@ -1461,7 +1724,7 @@ function navTo(t){
   if(t==='messages')renderMessages();
   if(t==='risk')renderRisk();
   if(t==='reports')renderReports();
-  if(t==='tax')renderTax();
+  if(t==='expenses')renderExpenses();
 }
 
 // ═══════════ BADGE ═══════════
@@ -1839,6 +2102,11 @@ function viewBldTenant(id, pool){
   if(!t) return;
   document.getElementById('td-ttl').textContent=t.name+' — Unit '+t.unit;
   document.getElementById('td-body').innerHTML=`
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+      <button onclick="openEditTenant(${t.id});closeM('tdetail')" class="btn-add" style="font-size:12px"><i class="ti ti-edit"></i> Edit Details</button>
+      <button onclick="regenCreds(${t.id})" class="btn-add" style="font-size:12px;background:var(--teal-l);color:var(--teal-d);border:.5px solid var(--teal-m)"><i class="ti ti-key"></i> Regenerate Password</button>
+      <button onclick="openMarkPaid(${t.id});closeM('tdetail')" class="btn-add" style="font-size:12px;background:var(--green-l);color:var(--green-d);border:.5px solid #C0DD97" ${t.status==='paid'?'disabled':''}><i class="ti ti-circle-check"></i> Mark Paid</button>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
       <div class="tdet"><strong>Personal</strong><br>📞 ${t.phone}<br>📧 ${t.email}<br>🪪 ID: ${t.idNo||'N/A'}<br>📅 Move-in: ${t.moveIn}</div>
       <div class="tdet"><strong>Employment</strong><br>💼 ${t.empType}<br>🏢 ${t.employer||'N/A'}<br>💰 Income: ${t.income?'KES '+t.income.toLocaleString():'N/A'}</div>
@@ -1871,7 +2139,7 @@ function addBuilding(){
   allBuildings.push(newBld);
   document.getElementById('ab-ok').style.display='flex';
   setTimeout(()=>{closeM('addBuilding');document.getElementById('ab-ok').style.display='none';},1600);
-  saveToStorage();
+  if(DB_ENABLED) dbCreateBuilding(newBld); else saveToStorage();
   renderBuildings();
   toast(name+' added to your portfolio.');
 }
@@ -1902,11 +2170,546 @@ function saveEditBuilding(){
   b.type=document.getElementById('eb-type').value;
   b.notes=document.getElementById('eb-notes').value;
   document.getElementById('eb-ok').style.display='flex';
-  saveToStorage();
+  if(DB_ENABLED) dbUpdateBuilding(editingBuildingId, b); else saveToStorage();
   setTimeout(()=>{closeM('editBuilding');document.getElementById('eb-ok').style.display='none';renderBuildings();},1400);
   toast('Building updated: '+b.name);
   // If currently in building detail view, refresh header
   if(activeBuildingId===editingBuildingId)openBuilding(editingBuildingId);
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// CREDENTIALS & OTP SYSTEM
+// ═══════════════════════════════════════════════════════════
+
+// Detect current app URL for sharing with tenants
+function appUrl(){
+  try{
+    return window.location.origin + window.location.pathname.replace(/\/[^\/]*$/,'/');
+  }catch(e){ return 'https://your-app.vercel.app'; }
+}
+
+// Generate a secure one-time password
+// Format: 2 uppercase letters + 4 digits + 1 special = easy to type on phone
+function genOTP(){
+  const letters='ABCDEFGHJKLMNPQRSTUVWXYZ'; // no I,O to avoid confusion
+  const digits='0123456789';
+  let p='';
+  for(let i=0;i<2;i++) p+=letters[Math.floor(Math.random()*letters.length)];
+  for(let i=0;i<4;i++) p+=digits[Math.floor(Math.random()*digits.length)];
+  p+=['@','#','$','!'][Math.floor(Math.random()*4)];
+  return p; // e.g. RK7823!
+}
+
+let _lastCreds = {}; // store for SMS share
+
+function showTenantCreds(name, email, pass, unit){
+  _lastCreds = {name, email, pass, unit};
+  document.getElementById('tc-name').textContent = name;
+  document.getElementById('tc-email').textContent = email;
+  document.getElementById('tc-pass').textContent = pass;
+  document.getElementById('tc-unit').textContent = 'Unit ' + unit;
+  document.getElementById('tc-link').textContent = appUrl();
+  // Reset copy buttons
+  document.querySelectorAll('.cred-copy').forEach(b=>{b.textContent='Copy';b.style.background='';});
+  openM('tenantCreds');
+}
+
+function copyVal(elId, label){
+  const val = document.getElementById(elId).textContent;
+  navigator.clipboard.writeText(val).then(()=>{
+    const btn = event.target;
+    btn.textContent='Copied!';
+    btn.style.background='rgba(29,158,117,.3)';
+    btn.style.color='#5DCAA5';
+    setTimeout(()=>{btn.textContent='Copy';btn.style.background='';btn.style.color='';},2000);
+  }).catch(()=>{
+    // Fallback for browsers without clipboard API
+    const el=document.createElement('textarea');
+    el.value=val;document.body.appendChild(el);el.select();
+    document.execCommand('copy');document.body.removeChild(el);
+    toast(label+' copied!');
+  });
+}
+
+function shareCreds(){
+  const {name,email,pass,unit} = _lastCreds;
+  const url = appUrl();
+  const msg = `Hello ${name},\n\nYour RentFlow tenant account has been created.\n\nApp Link: ${url}\nEmail: ${email}\nPassword: ${pass}\nYour Unit: ${unit}\n\nPlease log in and change your password after first login.\n\nFor any issues contact your landlord.`;
+  navigator.clipboard.writeText(msg).then(()=>{
+    toast('SMS message copied — paste into WhatsApp or SMS!');
+  }).catch(()=>{
+    // Show in alert as fallback
+    alert('Copy this message to send to the tenant:\n\n'+msg);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// DEVELOPER-ONLY PERMANENT DELETE
+// ═══════════════════════════════════════════════════════════
+
+let _permDelTenantId = null;
+let _permDelLandlordId = null;
+
+function openPermDelTenant(tenantId, name, unit, landlordName){
+  _permDelTenantId = tenantId;
+  document.getElementById('pdt-confirm').value='';
+  document.getElementById('pdt-btn').disabled=true;
+  document.getElementById('pdt-info').innerHTML=`
+    <div style="margin-bottom:6px;color:white;font-weight:500">${name}</div>
+    <div>Unit ${unit} &nbsp;·&nbsp; Landlord: ${landlordName||'N/A'}</div>
+    <div style="color:#F0997B;margin-top:6px;font-size:11px">All payment records, messages and login credentials will be deleted permanently.</div>
+  `;
+  devOpenM('permDelTenant');
+}
+
+function execPermDelTenant(){
+  if(document.getElementById('pdt-confirm').value!=='DELETE') return;
+  const allT=[...tenants,...extraTenants];
+  const t=allT.find(x=>x.id===_permDelTenantId);
+  if(t){
+    // Remove from local arrays
+    const tIdx=tenants.indexOf(t);
+    if(tIdx>-1) tenants.splice(tIdx,1);
+    const eIdx=extraTenants.indexOf(t);
+    if(eIdx>-1) extraTenants.splice(eIdx,1);
+    // Remove from CREDS
+    if(t.email&&CREDS[t.email]) delete CREDS[t.email];
+    // Remove from tenantNotifMap
+    if(tenantNotifMap[t.id]) delete tenantNotifMap[t.id];
+    // DB permanent delete
+    if(DB_ENABLED && t.dbId) dbDeleteTenant(t.dbId);
+  }
+  devCloseM('permDelTenant');
+  // Refresh dev view
+  renderDevAllTenants();
+  renderDevStats();
+  addAuditEntry('ad-r','PERMANENT DELETE — Tenant: '+(t?t.name:'unknown')+' deleted by developer');
+  devToast('Tenant permanently deleted from all records.');
+  saveToStorage();
+}
+
+function openPermDelLandlord(llId, name, property){
+  _permDelLandlordId = llId;
+  document.getElementById('pdl-confirm').value='';
+  document.getElementById('pdl-btn').disabled=true;
+  const llTenants=extraTenants.filter(t=>t.lid===llId);
+  document.getElementById('pdl-info').innerHTML=`
+    <div style="margin-bottom:6px;color:white;font-weight:500">${name}</div>
+    <div>${property}</div>
+    <div style="color:#F0997B;margin-top:8px;font-size:12px">
+      This will permanently delete:<br>
+      • ${allBuildings.filter(b=>b.lid===llId).length} building(s)<br>
+      • ${llTenants.length} tenant account(s)<br>
+      • All payment records and messages<br>
+      • All login credentials
+    </div>
+  `;
+  devOpenM('permDelLandlord');
+}
+
+function execPermDelLandlord(){
+  if(document.getElementById('pdl-confirm').value!=='DELETE') return;
+  const lid=_permDelLandlordId;
+  const ll=landlords.find(x=>x.id===lid);
+
+  // Delete all tenants for this landlord
+  const llTenants=[...extraTenants.filter(t=>t.lid===lid),...tenants.filter(t=>t.lid===lid)];
+  llTenants.forEach(t=>{
+    if(t.email&&CREDS[t.email]) delete CREDS[t.email];
+    if(tenantNotifMap[t.id]) delete tenantNotifMap[t.id];
+    const idx=extraTenants.indexOf(t); if(idx>-1) extraTenants.splice(idx,1);
+    if(DB_ENABLED && t.dbId) dbDeleteTenant(t.dbId);
+  });
+
+  // Delete all buildings
+  const llBlds=allBuildings.filter(b=>b.lid===lid);
+  llBlds.forEach(b=>{
+    const idx=allBuildings.indexOf(b); if(idx>-1) allBuildings.splice(idx,1);
+    if(DB_ENABLED) dbDeleteBuilding(b.id);
+  });
+
+  // Delete landlord
+  const lIdx=landlords.indexOf(ll); if(lIdx>-1) landlords.splice(lIdx,1);
+  if(ll && ll.email && CREDS[ll.email]) delete CREDS[ll.email];
+
+  devCloseM('permDelLandlord');
+  renderDevLandlords();
+  renderDevStats();
+  addAuditEntry('ad-r','PERMANENT DELETE — Landlord: '+(ll?ll.name:'unknown')+' and all data deleted by developer');
+  devToast('Landlord and all associated data permanently deleted.');
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// EXPENDITURES MODULE
+// ═══════════════════════════════════════════════════════════
+
+const EXP_CATEGORIES = {
+  water:       {name:'Water Bill',       icon:'ti-droplet',        color:'#185FA5', bg:'var(--blue-l)'},
+  electricity: {name:'Electricity',      icon:'ti-bolt',           color:'#BA7517', bg:'var(--amber-l)'},
+  security:    {name:'Security',         icon:'ti-shield-check',   color:'#993C1D', bg:'var(--coral-l)'},
+  caretaker:   {name:'Caretaker Salary', icon:'ti-user-circle',    color:'#0F6E56', bg:'var(--teal-l)'},
+  repairs:     {name:'Repairs & Maint.', icon:'ti-tool',           color:'#633806', bg:'var(--amber-l)'},
+  agent:       {name:'Agent Fees',       icon:'ti-building',       color:'#72243E', bg:'var(--pink-l)'},
+  insurance:   {name:'Insurance',        icon:'ti-umbrella',       color:'#0C447C', bg:'var(--blue-l)'},
+  rates:       {name:'Land Rates',       icon:'ti-map-pin',        color:'#27500A', bg:'var(--green-l)'},
+  garbage:     {name:'Garbage',          icon:'ti-trash',          color:'#5F5E5A', bg:'var(--gray-100)'},
+  internet:    {name:'Internet / WiFi',  icon:'ti-wifi',           color:'#185FA5', bg:'var(--blue-l)'},
+  cleaning:    {name:'Cleaning',         icon:'ti-sparkles',       color:'#0F6E56', bg:'var(--teal-l)'},
+  pest:        {name:'Pest Control',     icon:'ti-bug',            color:'#993C1D', bg:'var(--coral-l)'},
+  legal:       {name:'Legal / Fees',     icon:'ti-scale',          color:'#444441', bg:'var(--gray-100)'},
+  other:       {name:'Other',            icon:'ti-dots-circle-horizontal', color:'#888780', bg:'var(--gray-100)'},
+};
+
+// Sample expense data for demo
+let expenses = [
+  {id:1, cat:'water',       bldId:'b4', bldName:'Block A', amt:3200,  date:'2026-05-02', desc:'Monthly water bill', vendor:'Nairobi Water',    ref:'NW20260502', receipt:true},
+  {id:2, cat:'electricity', bldId:'b4', bldName:'Block A', amt:8500,  date:'2026-05-03', desc:'Common area electricity', vendor:'Kenya Power', ref:'KPLC8821',   receipt:true},
+  {id:3, cat:'security',    bldId:'all',bldName:'All Bldgs',amt:15000,date:'2026-05-01', desc:'Security guard monthly salary', vendor:'G4S Kenya', ref:'G4S001', receipt:false},
+  {id:4, cat:'caretaker',   bldId:'all',bldName:'All Bldgs',amt:12000,date:'2026-05-01', desc:'Caretaker - James Mwangi',    vendor:'Direct',    ref:'',         receipt:false},
+  {id:5, cat:'repairs',     bldId:'b5', bldName:'Block B', amt:4500,  date:'2026-05-08', desc:'Plumbing repair - B3 bathroom', vendor:'Plumber Joe',ref:'RCPT-01',receipt:true},
+  {id:6, cat:'garbage',     bldId:'all',bldName:'All Bldgs',amt:2000, date:'2026-05-01', desc:'Monthly garbage collection',  vendor:'City Council',ref:'CC2026', receipt:false},
+  {id:7, cat:'water',       bldId:'b5', bldName:'Block B', amt:2800,  date:'2026-04-02', desc:'April water bill - Block B',  vendor:'Nairobi Water',ref:'NW0042', receipt:true},
+  {id:8, cat:'electricity', bldId:'b5', bldName:'Block B', amt:6200,  date:'2026-04-03', desc:'April electricity - Block B', vendor:'Kenya Power', ref:'KPLC8700',receipt:true},
+  {id:9, cat:'agent',       bldId:'all',bldName:'All Bldgs',amt:9600, date:'2026-04-01', desc:'5% management fee - April',   vendor:'RentFlow Agent',ref:'AG-APR',receipt:false},
+  {id:10,cat:'repairs',     bldId:'b4', bldName:'Block A', amt:7200,  date:'2026-04-15', desc:'Gate motor repair',           vendor:'AutoGates Ltd',ref:'AG-INV22',receipt:true},
+  {id:11,cat:'internet',    bldId:'all',bldName:'All Bldgs',amt:3500, date:'2026-04-01', desc:'Fibre internet - common area', vendor:'Safaricom',  ref:'SAF-APR',  receipt:true},
+  {id:12,cat:'insurance',   bldId:'all',bldName:'All Bldgs',amt:4200, date:'2026-03-01', desc:'Building insurance premium',  vendor:'Jubilee Ins.', ref:'JI-Q1',  receipt:true},
+];
+
+let expYear = 2026;
+let expMonth = 'all';
+let activeExpTab = 'overview';
+
+function renderExpenses(){
+  const lid = CU ? CU.lid : 'll5';
+  const myBlds = allBuildings.filter(b=>b.lid===lid);
+  const el = document.getElementById('exp-content');
+  if(!el) return;
+
+  const filtered = expMonth==='all'
+    ? expenses.filter(e=>new Date(e.date).getFullYear()===expYear)
+    : expenses.filter(e=>e.date.startsWith(expYear+'-'+expMonth));
+
+  const totalExp = filtered.reduce((s,e)=>s+e.amt,0);
+  const revenue = myTenants().filter(t=>t.status==='paid').reduce((s,t)=>s+t.rent,0);
+  const netProfit = revenue - totalExp;
+
+  // Category totals
+  const catTotals = {};
+  filtered.forEach(e=>{
+    catTotals[e.cat]=(catTotals[e.cat]||0)+e.amt;
+  });
+  const topCat = Object.entries(catTotals).sort((a,b)=>b[1]-a[1]);
+  const maxCatAmt = topCat.length ? topCat[0][1] : 1;
+
+  // Month options
+  const monthOpts = ['all','01','02','03','04','05','06','07','08','09','10','11','12'];
+  const monthNames = ['All Months','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  el.innerHTML = `
+    <div class="exp-hero">
+      <div class="exp-hero-inner">
+        <div class="exp-hero-ic"><i class="ti ti-wallet"></i></div>
+        <div style="flex:1">
+          <div class="exp-hero-title">Property Expenditures</div>
+          <div class="exp-hero-sub">Track all property costs — water, electricity, repairs, salaries and more.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.4px">Year</span>
+            <select class="exp-yr-dd" onchange="expYear=parseInt(this.value);renderExpenses()">
+              <option value="2026" ${expYear===2026?'selected':''}>2026</option>
+              <option value="2025" ${expYear===2025?'selected':''}>2025</option>
+              <option value="2024" ${expYear===2024?'selected':''}>2024</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.4px">Month</span>
+            <select class="exp-yr-dd" onchange="expMonth=this.value;renderExpenses()">
+              ${monthOpts.map((m,i)=>`<option value="${m}" ${expMonth===m?'selected':''}>${monthNames[i]}</option>`).join('')}
+            </select>
+          </div>
+          <button onclick="openExpenseModal()" class="btn-add" style="margin-top:16px"><i class="ti ti-plus"></i> Add Expense</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-summary-grid">
+      <div class="exp-sum-card">
+        <div class="exp-sum-lbl" style="color:var(--coral-d)"><i class="ti ti-trending-down" style="font-size:14px"></i> Total Expenses</div>
+        <div class="exp-sum-val" style="color:var(--coral-d)">KES ${totalExp.toLocaleString()}</div>
+        <div class="exp-sum-sub">${filtered.length} expense records</div>
+      </div>
+      <div class="exp-sum-card">
+        <div class="exp-sum-lbl" style="color:var(--teal-d)"><i class="ti ti-trending-up" style="font-size:14px"></i> Rent Collected</div>
+        <div class="exp-sum-val" style="color:var(--teal-d)">KES ${revenue.toLocaleString()}</div>
+        <div class="exp-sum-sub">This period</div>
+      </div>
+      <div class="exp-sum-card">
+        <div class="exp-sum-lbl" style="${netProfit>=0?'color:var(--green-d)':'color:var(--coral-d)'}"><i class="ti ti-cash" style="font-size:14px"></i> Net Profit</div>
+        <div class="exp-sum-val" style="${netProfit>=0?'color:var(--green-d)':'color:var(--coral-d)'}">KES ${Math.abs(netProfit).toLocaleString()}</div>
+        <div class="exp-sum-sub">${netProfit>=0?'Profit':'Loss'} after expenses</div>
+      </div>
+      <div class="exp-sum-card">
+        <div class="exp-sum-lbl"><i class="ti ti-chart-pie" style="font-size:14px"></i> Expense Ratio</div>
+        <div class="exp-sum-val">${revenue>0?Math.round(totalExp/revenue*100):0}%</div>
+        <div class="exp-sum-sub">Of rent collected</div>
+      </div>
+    </div>
+
+    <div class="exp-tabs">
+      <button class="exp-tab ${activeExpTab==='overview'?'on':''}" onclick="switchExpTab('overview')"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Overview</button>
+      <button class="exp-tab ${activeExpTab==='list'?'on':''}" onclick="switchExpTab('list')"><i class="ti ti-list" style="font-size:13px"></i> All Expenses</button>
+      <button class="exp-tab ${activeExpTab==='summary'?'on':''}" onclick="switchExpTab('summary')"><i class="ti ti-chart-bar" style="font-size:13px"></i> Monthly Summary</button>
+      <button class="exp-tab ${activeExpTab==='pnl'?'on':''}" onclick="switchExpTab('pnl')"><i class="ti ti-scale" style="font-size:13px"></i> P&amp;L Report</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="exp-section ${activeExpTab==='overview'?'on':''}" id="expt-overview">
+      <div class="exp-cat-grid">
+        ${Object.entries(EXP_CATEGORIES).map(([key,cat])=>{
+          const amt=catTotals[key]||0;
+          const count=filtered.filter(e=>e.cat===key).length;
+          if(amt===0&&count===0) return '';
+          const pct=maxCatAmt>0?Math.round(amt/maxCatAmt*100):0;
+          return `<div class="exp-cat-card" onclick="switchExpTab('list');setTimeout(()=>filterExpCat('${key}'),50)">
+            <div class="exp-cat-icon" style="background:${cat.bg};color:${cat.color}"><i class="ti ${cat.icon}"></i></div>
+            <div class="exp-cat-name">${cat.name}</div>
+            <div class="exp-cat-amt" style="color:${cat.color}">KES ${amt.toLocaleString()}</div>
+            <div class="exp-cat-sub">${count} transaction${count!==1?'s':''}</div>
+            <div class="exp-bar-track"><div class="exp-bar-fill" style="width:${pct}%;background:${cat.color};height:100%;border-radius:3px"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct"><i class="ti ti-clock-hour-4"></i> Recent Expenses</div><button onclick="switchExpTab('list')" class="btn-sm" style="flex:0;padding:5px 12px">View All</button></div>
+        <div style="padding:0 16px">
+          ${filtered.slice(0,8).map(e=>{
+            const cat=EXP_CATEGORIES[e.cat]||EXP_CATEGORIES.other;
+            return `<div class="exp-item">
+              <div class="exp-item-ic" style="background:${cat.bg};color:${cat.color}"><i class="ti ${cat.icon}"></i></div>
+              <div style="flex:1;min-width:0">
+                <div class="exp-item-name">${cat.name}</div>
+                <div class="exp-item-sub">${e.desc} · ${e.bldName} · ${e.date}</div>
+              </div>
+              <div style="text-align:right">
+                <div class="exp-item-amt">KES ${e.amt.toLocaleString()}</div>
+                <span class="exp-receipt-badge ${e.receipt?'rec-yes':'rec-no'}">${e.receipt?'Receipt':'No receipt'}</span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST TAB -->
+    <div class="exp-section ${activeExpTab==='list'?'on':''}" id="expt-list">
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+        <select class="fi" id="exp-cat-filter" style="width:auto;padding:7px 11px" onchange="renderExpenses()">
+          <option value="all">All Categories</option>
+          ${Object.entries(EXP_CATEGORIES).map(([k,c])=>`<option value="${k}">${c.name}</option>`).join('')}
+        </select>
+        <select class="fi" id="exp-bld-filter" style="width:auto;padding:7px 11px" onchange="renderExpenses()">
+          <option value="all">All Buildings</option>
+          ${myBlds.map(b=>`<option value="${b.id}">${b.name}</option>`).join('')}
+        </select>
+        <button onclick="openExpenseModal()" class="btn-add" style="margin-left:auto"><i class="ti ti-plus"></i> Add Expense</button>
+      </div>
+      <div class="card">
+        <table class="tt">
+          <thead><tr><th>Date</th><th>Category</th><th>Description</th><th>Building</th><th>Vendor</th><th>Amount</th><th>Receipt</th><th></th></tr></thead>
+          <tbody>
+            ${filtered.map(e=>{
+              const cat=EXP_CATEGORIES[e.cat]||EXP_CATEGORIES.other;
+              return `<tr>
+                <td style="font-size:12px;color:var(--tx2)">${e.date}</td>
+                <td><div style="display:flex;align-items:center;gap:6px"><div style="width:24px;height:24px;border-radius:6px;background:${cat.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ${cat.icon}" style="font-size:12px;color:${cat.color}"></i></div><span style="font-size:12px">${cat.name}</span></div></td>
+                <td style="font-size:12px">${e.desc}</td>
+                <td style="font-size:12px;color:var(--tx2)">${e.bldName}</td>
+                <td style="font-size:12px;color:var(--tx2)">${e.vendor||'—'}</td>
+                <td style="font-weight:500;color:var(--coral-d)">KES ${e.amt.toLocaleString()}</td>
+                <td><span class="exp-receipt-badge ${e.receipt?'rec-yes':'rec-no'}">${e.receipt?'Yes':'No'}</span></td>
+                <td><button class="ib dl" onclick="deleteExpense(${e.id})" title="Delete"><i class="ti ti-trash"></i></button></td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+        ${!filtered.length?`<div class="empty"><i class="ti ti-receipt-off"></i><p>No expenses recorded for this period.</p></div>`:''}
+        <div style="padding:12px 16px;background:var(--gray-50);border-top:.5px solid var(--bd);display:flex;justify-content:space-between;font-size:13px;font-weight:500">
+          <span>Total (${filtered.length} items)</span>
+          <span style="color:var(--coral-d)">KES ${totalExp.toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY SUMMARY TAB -->
+    <div class="exp-section ${activeExpTab==='summary'?'on':''}" id="expt-summary">
+      <div class="card" style="margin-bottom:14px">
+        <div class="ch"><div class="ct"><i class="ti ti-chart-bar"></i> Monthly Expense Breakdown — ${expYear}</div></div>
+        <div style="padding:16px">
+          ${[['01','Jan'],['02','Feb'],['03','Mar'],['04','Apr'],['05','May'],['06','Jun'],
+             ['07','Jul'],['08','Aug'],['09','Sep'],['10','Oct'],['11','Nov'],['12','Dec']].map(([m,lbl])=>{
+            const mExp=expenses.filter(e=>e.date.startsWith(expYear+'-'+m));
+            const mTotal=mExp.reduce((s,e)=>s+e.amt,0);
+            const mRev=myTenants().filter(t=>t.status==='paid').reduce((s,t)=>s+t.rent,0);
+            const maxVal=100000;
+            const pct=Math.min(100,Math.round(mTotal/maxVal*100));
+            return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="font-size:11px;color:var(--tx2);width:30px;flex-shrink:0">${lbl}</span>
+              <div style="flex:1;background:var(--gray-100);border-radius:3px;height:18px;overflow:hidden">
+                <div style="height:100%;width:${pct}%;background:var(--coral);border-radius:3px;display:flex;align-items:center;padding-left:7px">
+                  ${pct>20?`<span style="font-size:10px;color:white;font-weight:500">${(mTotal/1000).toFixed(0)}K</span>`:''}
+                </div>
+              </div>
+              <span style="font-size:11px;color:var(--tx2);width:90px;text-align:right">KES ${mTotal.toLocaleString()}</span>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct"><i class="ti ti-chart-pie"></i> By Category — ${expYear}</div></div>
+        <div style="padding:16px">
+          ${topCat.map(([key,amt])=>{
+            const cat=EXP_CATEGORIES[key]||EXP_CATEGORIES.other;
+            const pct=totalExp>0?Math.round(amt/totalExp*100):0;
+            return `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:.5px solid var(--bd)">
+              <div style="width:24px;height:24px;border-radius:6px;background:${cat.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ${cat.icon}" style="font-size:12px;color:${cat.color}"></i></div>
+              <span style="flex:1;font-size:13px">${cat.name}</span>
+              <div style="width:100px;background:var(--gray-100);border-radius:3px;height:5px;overflow:hidden"><div style="width:${pct}%;background:${cat.color};height:100%;border-radius:3px"></div></div>
+              <span style="font-size:12px;color:var(--tx2);width:50px;text-align:right">${pct}%</span>
+              <span style="font-size:13px;font-weight:500;color:var(--coral-d);width:100px;text-align:right">KES ${amt.toLocaleString()}</span>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- P&L REPORT TAB -->
+    <div class="exp-section ${activeExpTab==='pnl'?'on':''}" id="expt-pnl">
+      <div class="card" style="margin-bottom:14px">
+        <div class="ch"><div class="ct"><i class="ti ti-scale"></i> Profit & Loss Statement — ${expMonth==='all'?expYear:'Month '+expMonth+'/'+expYear}</div></div>
+        <div style="padding:16px">
+          <div class="exp-total-row"><span style="font-weight:500;color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:.4px">INCOME</span></div>
+          <div class="exp-total-row"><span>Rent Collected</span><span style="font-weight:500;color:var(--teal-d)">KES ${revenue.toLocaleString()}</span></div>
+          <div class="exp-total-row" style="padding-bottom:14px;margin-bottom:4px">
+            <span style="font-weight:500">Total Income</span>
+            <span style="font-weight:600;font-size:15px;color:var(--teal-d)">KES ${revenue.toLocaleString()}</span>
+          </div>
+          <div class="exp-total-row"><span style="font-weight:500;color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:.4px">EXPENDITURES</span></div>
+          ${topCat.map(([key,amt])=>{
+            const cat=EXP_CATEGORIES[key]||EXP_CATEGORIES.other;
+            return `<div class="exp-total-row">
+              <span style="display:flex;align-items:center;gap:7px"><i class="ti ${cat.icon}" style="font-size:13px;color:${cat.color}"></i>${cat.name}</span>
+              <span style="color:var(--coral-d)">(KES ${amt.toLocaleString()})</span>
+            </div>`;
+          }).join('')}
+          <div class="exp-total-row" style="padding-bottom:14px">
+            <span style="font-weight:500">Total Expenses</span>
+            <span style="font-weight:600;font-size:15px;color:var(--coral-d)">(KES ${totalExp.toLocaleString()})</span>
+          </div>
+          ${netProfit>=0
+            ?`<div class="exp-profit"><span style="font-size:14px;font-weight:500;color:var(--green-d)"><i class="ti ti-trending-up"></i> Net Profit</span><span style="font-size:18px;font-weight:500;font-family:var(--serif);color:var(--green-d)">KES ${netProfit.toLocaleString()}</span></div>`
+            :`<div class="exp-loss"><span style="font-size:14px;font-weight:500;color:var(--coral-d)"><i class="ti ti-trending-down"></i> Net Loss</span><span style="font-size:18px;font-weight:500;font-family:var(--serif);color:var(--coral-d)">(KES ${Math.abs(netProfit).toLocaleString()})</span></div>`}
+          <div style="margin-top:14px;font-size:11px;color:var(--tx3);line-height:1.7">
+            Expense ratio: ${revenue>0?Math.round(totalExp/revenue*100):0}% of income &nbsp;|&nbsp;
+            ${revenue>0?Math.round((revenue-totalExp)/revenue*100):0}% profit margin &nbsp;|&nbsp;
+            ${filtered.length} expense records
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="printPnL()" class="btn-add"><i class="ti ti-printer"></i> Print / Export P&L</button>
+        <button onclick="navTo('reports')" class="btn-add" style="background:var(--teal-l);color:var(--teal-d);border:.5px solid var(--teal-m)"><i class="ti ti-chart-bar"></i> View Full Reports</button>
+      </div>
+    </div>
+  `;
+}
+
+function switchExpTab(tab){
+  activeExpTab=tab;
+  renderExpenses();
+}
+
+function filterExpCat(cat){
+  const sel=document.getElementById('exp-cat-filter');
+  if(sel) sel.value=cat;
+}
+
+function openExpenseModal(){
+  const lid=CU?CU.lid:'ll5';
+  const myBlds=allBuildings.filter(b=>b.lid===lid);
+  // Set today's date
+  document.getElementById('ae-date').value=new Date().toISOString().slice(0,10);
+  // Populate buildings dropdown
+  const bldSel=document.getElementById('ae-bld');
+  bldSel.innerHTML='<option value="all">All Buildings</option>'+
+    myBlds.map(b=>`<option value="${b.id}">${b.name}</option>`).join('');
+  document.getElementById('ae-ok').style.display='none';
+  openM('addExpense');
+}
+
+function saveExpense(){
+  const cat=document.getElementById('ae-cat').value;
+  const amt=parseInt(document.getElementById('ae-amt').value)||0;
+  const date=document.getElementById('ae-date').value;
+  const desc=document.getElementById('ae-desc').value.trim();
+  if(!cat||!amt||!date){toast('Please fill in category, amount and date.');return;}
+  const bldId=document.getElementById('ae-bld').value;
+  const lid=CU?CU.lid:'ll5';
+  const bld=allBuildings.find(b=>b.id===bldId);
+  const receipt=document.getElementById('ae-rec-yes').checked;
+  expenses.push({
+    id:Date.now(), cat, bldId, lid,
+    bldName:bldId==='all'?'All Buildings':(bld?bld.name:bldId),
+    amt, date, desc,
+    vendor:document.getElementById('ae-vendor').value.trim(),
+    ref:document.getElementById('ae-ref').value.trim(),
+    receipt
+  });
+  document.getElementById('ae-ok').style.display='flex';
+  saveToStorage();
+  renderExpenses();
+  setTimeout(()=>{closeM('addExpense');document.getElementById('ae-ok').style.display='none';},1400);
+  toast('Expense recorded: KES '+amt.toLocaleString());
+}
+
+function deleteExpense(id){
+  expenses=expenses.filter(e=>e.id!==id);
+  saveToStorage();
+  renderExpenses();
+  toast('Expense deleted.');
+}
+
+function printPnL(){
+  const revenue=myTenants().filter(t=>t.status==='paid').reduce((s,t)=>s+t.rent,0);
+  const filtered=expenses.filter(e=>new Date(e.date).getFullYear()===expYear);
+  const totalExp=filtered.reduce((s,e)=>s+e.amt,0);
+  const net=revenue-totalExp;
+  const w=window.open('','_blank');
+  w.document.write(`<html><head><title>P&L Report ${expYear}</title>
+  <style>body{font-family:Arial,sans-serif;padding:30px;max-width:600px;margin:0 auto;color:#1a1a18}
+  h1{font-size:20px;margin-bottom:4px}h2{font-size:13px;font-weight:600;margin:16px 0 7px;border-bottom:1px solid #eee;padding-bottom:4px}
+  table{width:100%;border-collapse:collapse}td{padding:7px 0;font-size:13px;border-bottom:1px solid #f4f3ef}
+  .right{text-align:right}.green{color:#27500A;font-weight:600}.red{color:#993C1D;font-weight:600}
+  .total{font-weight:700;font-size:15px}.footer{font-size:11px;color:#888;margin-top:24px;border-top:1px solid #eee;padding-top:10px}</style></head><body>
+  <h1>Profit & Loss Report</h1>
+  <p style="font-size:13px;color:#888">Year: <strong>${expYear}</strong> &nbsp;|&nbsp; Generated: ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</p>
+  <h2>Income</h2><table>
+  <tr><td>Rent Collected</td><td class="right">KES ${revenue.toLocaleString()}</td></tr>
+  <tr><td class="total">Total Income</td><td class="right total green">KES ${revenue.toLocaleString()}</td></tr></table>
+  <h2>Expenditures</h2><table>
+  ${Object.entries(EXP_CATEGORIES).map(([key,cat])=>{
+    const amt=filtered.filter(e=>e.cat===key).reduce((s,e)=>s+e.amt,0);
+    return amt>0?`<tr><td>${cat.name}</td><td class="right">KES ${amt.toLocaleString()}</td></tr>`:'';
+  }).join('')}
+  <tr><td class="total">Total Expenses</td><td class="right total red">KES ${totalExp.toLocaleString()}</td></tr></table>
+  <h2>Net ${net>=0?'Profit':'Loss'}</h2><table>
+  <tr><td class="total">Net ${net>=0?'Profit':'Loss'}</td><td class="right total ${net>=0?'green':'red'}">KES ${Math.abs(net).toLocaleString()}</td></tr></table>
+  <div class="footer">Generated by RentFlow. This is an internal report for landlord use only.</div>
+  </body></html>`);
+  w.document.close();w.print();
 }
 
 // ═══════════ DASHBOARD ═══════════
@@ -2276,15 +3079,84 @@ function renderTenants(f){
       <td>${bdg(t.status)}</td>
       <td><div class="ar">
         <button class="ib" title="View details" onclick="viewTenant(${t.id})"><i class="ti ti-eye"></i></button>
+        <button class="ib ok" title="Edit tenant details" onclick="openEditTenant(${t.id})"><i class="ti ti-edit"></i></button>
         ${t.status!=='paid'?`<button class="ib ok" title="Mark as paid" onclick="openMarkPaid(${t.id})"><i class="ti ti-circle-check"></i></button>`:''}
         <button class="ib wa" title="Send SMS" onclick="sendSMS('${t.name}')"><i class="ti ti-message-2"></i></button>
-        <button class="ib dl" title="Vacate unit" onclick="openVacate(${t.id},'${t.name}','${t.unit}')"><i class="ti ti-door-exit"></i></button>
+        <button class="ib dl" title="Vacate unit (tenant leaving)" onclick="openVacate(${t.id},'${t.name}','${t.unit}')"><i class="ti ti-door-exit"></i></button>
       </div></td>
     </tr>`;
   }).join('');
 }
 function ordinal(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
 function filterT(f,btn){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderTenants(f);}
+
+let editingTenantId = null;
+
+function openEditTenant(id){
+  editingTenantId = id;
+  const allT=[...tenants,...extraTenants];
+  const t=allT.find(x=>x.id===id);
+  if(!t)return;
+  document.getElementById('et-title').textContent='Edit — '+t.name+' (Unit '+t.unit+')';
+  document.getElementById('et-name').value=t.name||'';
+  document.getElementById('et-phone').value=t.phone||'';
+  document.getElementById('et-email').value=t.email||'';
+  document.getElementById('et-idno').value=t.idNo||'';
+  document.getElementById('et-emp').value=t.empType||'Employed';
+  document.getElementById('et-employer').value=t.employer||'';
+  document.getElementById('et-income').value=t.income||'';
+  document.getElementById('et-biztype').value=t.bizType||'';
+  document.getElementById('et-rent').value=t.rent||'';
+  document.getElementById('et-due').value=t.dueDay||5;
+  document.getElementById('et-dep').value=t.deposit||'pending';
+  document.getElementById('et-depamt').value=t.depositAmt||'';
+  document.getElementById('et-notes').value=t.notes||'';
+  document.getElementById('et-ok').style.display='none';
+  openM('editTenant');
+}
+
+function saveEditTenant(){
+  const allT=[...tenants,...extraTenants];
+  const t=allT.find(x=>x.id===editingTenantId);
+  if(!t)return;
+  // Apply changes locally
+  t.name=document.getElementById('et-name').value.trim()||t.name;
+  t.phone=document.getElementById('et-phone').value.trim();
+  t.email=document.getElementById('et-email').value.trim();
+  t.idNo=document.getElementById('et-idno').value.trim();
+  t.empType=document.getElementById('et-emp').value;
+  t.employer=document.getElementById('et-employer').value.trim();
+  t.income=parseInt(document.getElementById('et-income').value)||t.income;
+  t.bizType=document.getElementById('et-biztype').value.trim();
+  t.rent=parseInt(document.getElementById('et-rent').value)||t.rent;
+  t.dueDay=parseInt(document.getElementById('et-due').value)||t.dueDay;
+  t.deposit=document.getElementById('et-dep').value;
+  t.depositAmt=parseInt(document.getElementById('et-depamt').value)||t.depositAmt;
+  t.notes=document.getElementById('et-notes').value;
+  t.ini=t.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  // Save
+  if(DB_ENABLED && t.dbId) dbUpdateTenant(t.dbId, t); else saveToStorage();
+  document.getElementById('et-ok').style.display='flex';
+  renderTenants(); renderDashboard();
+  setTimeout(()=>{closeM('editTenant');document.getElementById('et-ok').style.display='none';},1500);
+  toast(t.name+' details updated.');
+}
+
+
+function regenCreds(tenantId){
+  const allT=[...tenants,...extraTenants];
+  const t=allT.find(x=>x.id===tenantId);
+  if(!t){toast('Tenant not found');return;}
+  const newPass=genOTP();
+  // Update CREDS
+  if(CREDS[t.email]) CREDS[t.email].pass=newPass;
+  t.otp=newPass; t.otpGenAt=new Date().toISOString();
+  // Save
+  if(DB_ENABLED && t.dbId) dbUpdateTenant(t.dbId,{password_reset:newPass}); else saveToStorage();
+  showTenantCreds(t.name, t.email, newPass, t.unit);
+  closeM('tdetail');
+  toast('New password generated for '+t.name);
+}
 
 function viewTenant(id){
   const t=tenants.find(x=>x.id===id);
@@ -2349,10 +3221,10 @@ function confirmVacate(){
     t.vacated=new Date().toISOString();
     const size='2 bed, 1 bath';
     vacants.push({id:Date.now(),unit:t.unit,rent:t.rent,size,desc:'Recently vacated — available immediately',photos:[],avail:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}),deleted:false});
-    // Landlord alert
     addNotif('nii','ti-home-off','Unit '+t.unit+' now vacant',t.name+' vacated. Record deletes in 90 days.','Just now');
-    // Notify all remaining tenants of new vacancy
     notifyAllTenantsVacancy(t.unit, t.rent, size);
+    if(DB_ENABLED && t.dbId) dbVacateTenant(t.dbId, null);
+    else saveToStorage();
   }
   closeM('vacate');renderTenants();renderDashboard();renderVacants();
   toast('Unit '+t.unit+' vacated. SMS notice sent to '+t.name+'. Data deletes in 90 days.');
@@ -2405,19 +3277,26 @@ function addTenant(){
   };
   if(lid==='ll1'){tenants.push(newTenant);}
   else{extraTenants.push(newTenant);}
-  // Also auto-register as a tenant CREDS so they can log in
-  CREDS[email]={role:'tenant',pass:'Tenant'+Math.random().toString(36).slice(2,6).toUpperCase(),name,ini,col:cols[id%6],tid:id,lid};
-  // Show generated credentials in success message
-  const genPass='Tenant'+Math.random().toString(36).slice(2,6).toUpperCase();
-  const okEl=document.getElementById('at-ok');
-  okEl.innerHTML=`<i class="ti ti-check"></i> <span>Tenant created! <strong>Login:</strong> ${email} / <strong>Password:</strong> ${genPass} — share with tenant via SMS.</span>`;
-  okEl.style.display='flex';
-  addNotif('nig','ti-user-plus','New tenant added',name+' assigned to Unit '+unit+'.','Just now');
-  // Notify existing tenants that a unit is now occupied
+
+  // Generate ONE secure one-time password
+  const otp = genOTP();
+  CREDS[email]={role:'tenant',pass:otp,name,ini,col:cols[id%6],tid:id,lid,otpUsed:false};
+
+  // Store OTP in tenant record too (for reference)
+  newTenant.otp = otp;
+  newTenant.otpGenAt = new Date().toISOString();
+
+  // Save to DB (stores credentials in auth table)
+  if(DB_ENABLED) dbCreateTenant(newTenant, null);
+  else saveToStorage();
+
+  // Show credentials modal
+  showTenantCreds(name, email, otp, unit);
+
+  addNotif('nig','ti-user-plus','New tenant added',name+' assigned to Unit '+unit+'. Credentials generated.','Just now');
   notifyAllTenantsOccupied(unit);
-  setTimeout(()=>{closeM('addTenant');document.getElementById('at-ok').style.display='none';},1600);
+  closeM('addTenant');
   renderTenants();renderDashboard();
-  toast(name+' added to Unit '+unit+'. Login credentials sent by SMS.');
 }
 
 // ═══════════ VACANT ═══════════
@@ -3126,404 +4005,269 @@ function renderRisk() {
 // Landlords earning < KES 288K/year: exempt (below annual threshold)
 // Landlords earning > KES 15M/year: subject to income tax bands
 
-const KRA_RATES = {
-  rentalTaxRate: 0.075,          // 7.5% of gross rental income
-  lowerThreshold: 288000,        // Annual exempt threshold (KES 24K/mo)
-  upperThreshold: 15000000,      // Upper threshold for flat 7.5% rate
-  vatRate: 0.16,                 // VAT 16% (only if registered for VAT)
-  monthlyExempt: 24000,          // Monthly equivalent of lower threshold
-  filingDeadline: '20th of following month',
-  penaltyRate: 0.05,             // 5% penalty for late filing
-  interestRate: 0.01,            // 1% interest per month on unpaid tax
-  kraPortal: 'https://itax.kra.go.ke',
-  kraHelp: 'https://www.kra.go.ke/individual/filing-paying/types-of-taxes/rental-income-tax',
-};
 
-// Full-year monthly revenue data (2025 tax year)
-const TAX_MONTHLY = [
-  {mo:'Jan',collected:192000,outstanding:0},
-  {mo:'Feb',collected:174000,outstanding:18000},
-  {mo:'Mar',collected:158000,outstanding:34000},
-  {mo:'Apr',collected:192000,outstanding:0},
-  {mo:'May',collected:144000,outstanding:48000},
-  {mo:'Jun',collected:185000,outstanding:7000},
-  {mo:'Jul',collected:192000,outstanding:0},
-  {mo:'Aug',collected:180000,outstanding:12000},
-  {mo:'Sep',collected:192000,outstanding:0},
-  {mo:'Oct',collected:176000,outstanding:16000},
-  {mo:'Nov',collected:192000,outstanding:0},
-  {mo:'Dec',collected:188000,outstanding:4000},
-];
 
-let taxYear = 2025;
-let activeKraTab = 'summary';
+// ═══════════════════════════════════════════════════════════
+// DATABASE OPERATIONS — called when DB_ENABLED = true
+// These replace localStorage with real Supabase calls
+// ═══════════════════════════════════════════════════════════
 
-function renderTax(){
-  const el = document.getElementById('kra-content');
-  const yr = taxYear;
+// ── Loading overlay ──────────────────────────────────────
+function showLoading(msg='Saving...'){
+  let el=document.getElementById('db-loading');
+  if(!el){
+    el=document.createElement('div');
+    el.id='db-loading';
+    el.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(2px)';
+    el.innerHTML=`<div style="background:white;border-radius:14px;padding:24px 32px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.2)">
+      <i class="ti ti-loader-2" style="font-size:28px;color:var(--teal);display:block;margin-bottom:10px;animation:spin 1s linear infinite"></i>
+      <div id="db-loading-msg" style="font-size:14px;color:var(--tx2)">Saving...</div>
+    </div>`;
+    document.body.appendChild(el);
+    const style=document.createElement('style');
+    style.textContent='@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}';
+    document.head.appendChild(style);
+  }
+  document.getElementById('db-loading-msg').textContent=msg;
+  el.style.display='flex';
+}
+function hideLoading(){ const el=document.getElementById('db-loading'); if(el)el.style.display='none'; }
 
-  // Compute annual figures
-  const annualGross = TAX_MONTHLY.reduce((s,m)=>s+m.collected,0);
-  const annualOutstanding = TAX_MONTHLY.reduce((s,m)=>s+m.outstanding,0);
-  const annualTotal = annualGross + annualOutstanding; // total billed
-
-  // Allowable deductions (Kenya: 50% of gross for allowable expenses under old regime,
-  // OR flat rate gross method at 7.5% with no deductions under new residential rental regime)
-  const landRates = Math.round(annualGross * 0.01);       // ~1% land rates/council
-  const insurance = Math.round(annualGross * 0.02);        // ~2% insurance
-  const maintenance = Math.round(annualGross * 0.03);      // ~3% maintenance
-  const agentFees = Math.round(annualGross * 0.01);        // ~1% agent/management
-  const totalDeductions = landRates + insurance + maintenance + agentFees;
-  const netIncome = annualGross - totalDeductions;
-
-  // Tax computation (7.5% on gross — residential rental income tax, no deductions)
-  const grossTax = Math.round(annualGross * KRA_RATES.rentalTaxRate);
-  const monthlyTax = Math.round(grossTax / 12);
-  const isExempt = annualGross < KRA_RATES.lowerThreshold;
-  const isFlatRate = annualGross >= KRA_RATES.lowerThreshold && annualGross <= KRA_RATES.upperThreshold;
-
-  const maxMonth = Math.max(...TAX_MONTHLY.map(m=>m.collected));
-
-  el.innerHTML = `
-    <!-- HERO -->
-    <div class="kra-hero">
-      <div class="kra-hero-inner">
-        <div class="kra-logo"><i class="ti ti-receipt-tax"></i></div>
-        <div style="flex:1">
-          <div class="kra-title">KRA Rental Income Tax</div>
-          <div class="kra-sub">Kenya Revenue Authority — Residential Rental Income Tax<br>Filed monthly by the <strong style="color:rgba(255,255,255,.8)">20th of the following month</strong> via iTax</div>
-        </div>
-        <div class="kra-year-sel">
-          <div class="kra-yr-lbl">Tax Year</div>
-          <select class="kra-yr-dd" onchange="taxYear=parseInt(this.value);renderTax()">
-            <option value="2025" ${taxYear===2025?'selected':''}>2025</option>
-            <option value="2024" ${taxYear===2024?'selected':''}>2024</option>
-            <option value="2023" ${taxYear===2023?'selected':''}>2023</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- ALERTS -->
-    <div class="kra-alert kra-alert-warn">
-      <i class="ti ti-alert-triangle"></i>
-      <div><strong>Filing Due:</strong> Rental Income Tax for each month must be filed and paid by the <strong>20th of the following month</strong>. Late filing attracts a 5% penalty plus 1% monthly interest on unpaid tax. Ensure your KRA PIN is active.</div>
-    </div>
-    <div class="kra-alert kra-alert-info">
-      <i class="ti ti-info-circle"></i>
-      <div><strong>Residential Rental Income Tax (RRIT):</strong> Under Kenya's Finance Act 2023, residential rental income is taxed at a flat <strong>7.5% of gross rent collected</strong> — no deductions allowed under this regime. This is a final tax. Applies if annual gross rent is between KES 288,000 and KES 15,000,000.</div>
-    </div>
-
-    <!-- KRA INNER TABS -->
-    <div class="kra-tab-bar">
-      <button class="kra-tab ${activeKraTab==='summary'?'on':''}" onclick="switchKraTab('summary')"><i class="ti ti-calculator" style="font-size:13px"></i> Tax Summary</button>
-      <button class="kra-tab ${activeKraTab==='monthly'?'on':''}" onclick="switchKraTab('monthly')"><i class="ti ti-calendar-stats" style="font-size:13px"></i> Monthly Breakdown</button>
-      <button class="kra-tab ${activeKraTab==='deductions'?'on':''}" onclick="switchKraTab('deductions')"><i class="ti ti-receipt" style="font-size:13px"></i> Deductions & Expenses</button>
-      <button class="kra-tab ${activeKraTab==='file'?'on':''}" onclick="switchKraTab('file')"><i class="ti ti-send" style="font-size:13px"></i> How to File</button>
-    </div>
-
-    <!-- TAB: SUMMARY -->
-    <div class="kra-section ${activeKraTab==='summary'?'on':''}" id="krat-summary">
-      <div class="kra-grid">
-        <!-- Revenue -->
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-cash"></i> ${yr} Revenue Overview</div>
-          <div class="kra-row"><span class="kra-row-lbl">Gross Rent Collected</span><span class="kra-row-val highlight">KES ${annualGross.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Outstanding / Unpaid</span><span class="kra-row-val" style="color:var(--coral-d)">KES ${annualOutstanding.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Total Rent Invoiced</span><span class="kra-row-val">KES ${annualTotal.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">No. of Tenants</span><span class="kra-row-val">${tenants.filter(t=>!t.vacated).length} active</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Collection Rate</span><span class="kra-row-val" style="color:var(--teal-d)">${annualTotal>0?Math.round(annualGross/annualTotal*100):0}%</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Monthly Average</span><span class="kra-row-val">KES ${Math.round(annualGross/12).toLocaleString()}</span></div>
-        </div>
-
-        <!-- Tax Computation -->
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-receipt-tax"></i> Tax Computation — ${yr}</div>
-          <div class="kra-divider-row"><span>RRIT REGIME (7.5% of gross)</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Gross Rental Income</span><span class="kra-row-val">KES ${annualGross.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Tax Rate</span><span class="kra-row-val">7.5%</span></div>
-          <div class="kra-row"><span class="kra-row-lbl" style="font-weight:500;color:var(--tx)">Annual Tax Due</span><span class="kra-row-val tax" style="font-size:16px">KES ${grossTax.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Monthly Tax (avg)</span><span class="kra-row-val tax">KES ${monthlyTax.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Regime</span><span class="kra-row-val">${isFlatRate?'Flat 7.5% (Final Tax)':isExempt?'Exempt (<KES 288K)':'Income Tax Bands'}</span></div>
-          <div style="background:var(--coral-l);border:.5px solid #F0997B;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--coral-d);display:flex;gap:7px;align-items:center">
-            <i class="ti ti-alert-circle" style="font-size:15px;flex-shrink:0"></i>
-            <div>Tax is paid on <strong>collected rent only</strong>, not invoiced. Outstanding amounts become taxable when received.</div>
-          </div>
-        </div>
-
-        <!-- Landlord Details for KRA -->
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-id-badge-2"></i> Landlord Details (for KRA filing)</div>
-          <div class="kra-row"><span class="kra-row-lbl">Full Name</span><span class="kra-row-val">John Kariuki</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">KRA PIN</span><span class="kra-row-val" style="font-family:monospace">A003456789B</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">ID Number</span><span class="kra-row-val">12345678</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Phone</span><span class="kra-row-val">+254 700 111 222</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Property</span><span class="kra-row-val">Sunrise Apartments</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Location</span><span class="kra-row-val">Kasarani, Nairobi</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Filing Obligation</span><span class="kra-row-val" style="color:var(--teal-d)">Monthly by 20th</span></div>
-          <div class="kra-pin-box" style="margin-top:10px">
-            <div class="kra-pin-icon"><i class="ti ti-key"></i></div>
-            <div>
-              <div style="font-size:12px;font-weight:500;color:var(--tx)">KRA PIN Required</div>
-              <div style="font-size:11px;color:var(--tx2);margin-top:2px">Your KRA PIN is required for all tax filings. Keep it confidential. If you do not have one, register at <strong>itax.kra.go.ke</strong></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Upcoming Deadlines -->
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-calendar-due"></i> Filing Deadlines — ${yr}</div>
-          ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map((m,i)=>{
-            const mData = TAX_MONTHLY[i];
-            const mTax = Math.round(mData.collected * KRA_RATES.rentalTaxRate);
-            const status = i < 4 ? 'filed' : i === 4 ? 'due' : 'upcoming';
-            const statusColor = status==='filed'?'var(--green-d)':status==='due'?'var(--coral-d)':'var(--tx3)';
-            const statusLabel = status==='filed'?'Filed':'status==="due"'?'Due':'Upcoming';
-            return `<div class="kra-row">
-              <span class="kra-row-lbl">${m} → by 20 ${['Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan'][i]}</span>
-              <div style="display:flex;align-items:center;gap:8px">
-                <span style="font-size:12px;font-weight:500">KES ${mTax.toLocaleString()}</span>
-                <span style="font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;background:${status==='filed'?'var(--green-l)':status==='due'?'var(--coral-l)':'var(--gray-100)'};color:${statusColor}">${status==='filed'?'✓ Filed':status==='due'?'! Due':'Upcoming'}</span>
-              </div>
-            </div>`;
-          }).join('')}
-          <div style="margin-top:12px;font-size:11px;color:var(--tx3)">Total annual tax: <strong style="color:var(--coral-d)">KES ${grossTax.toLocaleString()}</strong></div>
-        </div>
-      </div>
-
-      <!-- Quick actions -->
-      <div class="kra-card" style="margin-bottom:0">
-        <div class="kra-card-title"><i class="ti ti-bolt"></i> Quick Actions</div>
-        <div class="kra-download-bar">
-          <a href="https://itax.kra.go.ke" target="_blank" rel="noopener" class="kra-dl-btn kra-dl-primary"><i class="ti ti-external-link"></i> Open KRA iTax Portal</a>
-          <button class="kra-dl-btn" onclick="downloadTaxSummary()"><i class="ti ti-download"></i> Download Tax Summary (PDF)</button>
-          <button class="kra-dl-btn" onclick="toast('Tax certificate generated for ${yr}')"><i class="ti ti-certificate"></i> Generate Tax Certificate</button>
-          <button class="kra-dl-btn" onclick="switchKraTab('file')"><i class="ti ti-help"></i> Filing Guide</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB: MONTHLY BREAKDOWN -->
-    <div class="kra-section ${activeKraTab==='monthly'?'on':''}" id="krat-monthly">
-      <div class="kra-card" style="margin-bottom:14px">
-        <div class="kra-card-title"><i class="ti ti-chart-bar"></i> Monthly Revenue & Tax — ${yr}</div>
-        ${TAX_MONTHLY.map((m,i)=>{
-          const mTax=Math.round(m.collected*KRA_RATES.rentalTaxRate);
-          const pct=maxMonth>0?Math.round(m.collected/maxMonth*100):0;
-          return `<div class="kra-monthly-bar">
-            <span class="kra-bar-lbl">${m.mo}</span>
-            <div class="kra-bar-track">
-              <div class="kra-bar-fill${m.outstanding>0?' partial':''}" style="width:${pct}%">${pct>25?'KES '+(m.collected/1000).toFixed(0)+'K':''}</div>
-            </div>
-            <span class="kra-bar-val">Tax: <strong>KES ${mTax.toLocaleString()}</strong></span>
-          </div>`;
-        }).join('')}
-        <div style="margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-          <div class="hist-sum-box"><div class="hist-sum-val" style="color:var(--teal-d)">KES ${(annualGross/1000).toFixed(0)}K</div><div class="hist-sum-lbl">Total Collected</div></div>
-          <div class="hist-sum-box"><div class="hist-sum-val" style="color:var(--coral-d)">KES ${(grossTax/1000).toFixed(0)}K</div><div class="hist-sum-lbl">Total Tax Due</div></div>
-          <div class="hist-sum-box"><div class="hist-sum-val">${Math.round(grossTax/annualGross*100)}%</div><div class="hist-sum-lbl">Effective Rate</div></div>
-        </div>
-      </div>
-      <div class="kra-card">
-        <div class="kra-card-title"><i class="ti ti-table"></i> Detailed Monthly Table</div>
-        <div style="overflow-x:auto">
-          <table class="tt">
-            <thead><tr>
-              <th>Month</th><th>Gross Collected</th><th>Outstanding</th><th>Tax @ 7.5%</th><th>Filing Deadline</th><th>Status</th>
-            </tr></thead>
-            <tbody>
-              ${TAX_MONTHLY.map((m,i)=>{
-                const mTax=Math.round(m.collected*KRA_RATES.rentalTaxRate);
-                const deadlines=['20 Feb','20 Mar','20 Apr','20 May','20 Jun','20 Jul','20 Aug','20 Sep','20 Oct','20 Nov','20 Dec','20 Jan'];
-                const st=i<4?'<span class="bdg bpd">Filed</span>':i===4?'<span class="bdg bov">Due Now</span>':'<span class="bdg bpn">Upcoming</span>';
-                return `<tr>
-                  <td><strong>${m.mo} ${yr}</strong></td>
-                  <td style="color:var(--teal-d);font-weight:500">KES ${m.collected.toLocaleString()}</td>
-                  <td style="color:${m.outstanding>0?'var(--coral-d)':'var(--tx3)'}">${m.outstanding>0?'KES '+m.outstanding.toLocaleString():'—'}</td>
-                  <td style="color:var(--coral-d);font-weight:500">KES ${mTax.toLocaleString()}</td>
-                  <td style="font-size:12px;color:var(--tx2)">${deadlines[i]} ${yr+(i===11?1:0)}</td>
-                  <td>${st}</td>
-                </tr>`;
-              }).join('')}
-              <tr style="background:var(--gray-50)">
-                <td><strong>TOTAL ${yr}</strong></td>
-                <td style="color:var(--teal-d);font-weight:500">KES ${annualGross.toLocaleString()}</td>
-                <td style="color:var(--coral-d)">KES ${annualOutstanding.toLocaleString()}</td>
-                <td style="color:var(--coral-d);font-weight:600;font-size:14px">KES ${grossTax.toLocaleString()}</td>
-                <td colspan="2"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB: DEDUCTIONS -->
-    <div class="kra-section ${activeKraTab==='deductions'?'on':''}" id="krat-deductions">
-      <div class="kra-alert kra-alert-warn" style="margin-bottom:14px">
-        <i class="ti ti-alert-triangle"></i>
-        <div><strong>Note on Deductions:</strong> Under the Residential Rental Income Tax (RRIT) regime at 7.5%, <strong>no deductions are allowed</strong>. However, if you opt out of RRIT and file under normal income tax, you can claim these deductions. Consult a tax advisor before opting out.</div>
-      </div>
-      <div class="kra-grid">
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-minus-vertical"></i> Allowable Deductions (If on Normal IT)</div>
-          <div class="kra-row"><span class="kra-row-lbl">Land Rates / Council Fees (~1%)</span><span class="kra-row-val deduct">KES ${landRates.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Building Insurance (~2%)</span><span class="kra-row-val deduct">KES ${insurance.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Repairs & Maintenance (~3%)</span><span class="kra-row-val deduct">KES ${maintenance.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Agent / Management Fees (~1%)</span><span class="kra-row-val deduct">KES ${agentFees.toLocaleString()}</span></div>
-          <div style="background:var(--gray-50);margin:8px -18px 0;padding:10px 18px;border-top:.5px solid var(--bd)">
-            <div class="kra-row" style="border:none;padding:0"><span style="font-weight:500">Total Deductions</span><span style="font-weight:500;color:var(--green-d)">KES ${totalDeductions.toLocaleString()}</span></div>
-          </div>
-        </div>
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-math"></i> Comparison: RRIT vs Normal IT</div>
-          <div class="kra-row"><span class="kra-row-lbl">Gross Rental Income</span><span class="kra-row-val">KES ${annualGross.toLocaleString()}</span></div>
-          <div style="height:1px;background:var(--bd);margin:6px 0"></div>
-          <div style="font-size:11px;font-weight:500;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">RRIT (7.5% flat)</div>
-          <div class="kra-row"><span class="kra-row-lbl">No deductions allowed</span><span class="kra-row-val tax">Tax: KES ${grossTax.toLocaleString()}</span></div>
-          <div style="height:1px;background:var(--bd);margin:6px 0"></div>
-          <div style="font-size:11px;font-weight:500;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Normal Income Tax (approx.)</div>
-          <div class="kra-row"><span class="kra-row-lbl">Net Income (after deductions)</span><span class="kra-row-val">KES ${netIncome.toLocaleString()}</span></div>
-          <div class="kra-row"><span class="kra-row-lbl">Approx tax @30% band</span><span class="kra-row-val tax">KES ${Math.round(netIncome*0.30).toLocaleString()}</span></div>
-          <div style="background:var(--teal-l);border:.5px solid var(--teal-m);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:12px;color:var(--teal-d)">
-            <strong>Recommendation:</strong> RRIT at 7.5% is simpler and likely lower than normal IT for most landlords. Consult a CPA for your specific situation.
-          </div>
-        </div>
-      </div>
-      <div class="kra-card">
-        <div class="kra-card-title"><i class="ti ti-file-description"></i> Documentation to Keep</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          ${[
-            ['ti-home','Lease / Tenancy Agreements','Keep signed copies for all tenants — required as evidence of rental income'],
-            ['ti-receipt','Rent Receipts / M-Pesa Records','All payment records, M-Pesa statements, bank statements showing rent deposits'],
-            ['ti-file-invoice','Expense Receipts','If claiming deductions: invoices for repairs, agent fees, insurance premiums'],
-            ['ti-building','Title Deed / Ownership','Proof of property ownership — required if KRA audits your rental income'],
-            ['ti-calendar','iTax Filing Confirmations','Save all acknowledgement receipts from iTax after each monthly filing'],
-            ['ti-id','KRA PIN Certificate','Keep a copy of your KRA PIN certificate for all correspondence'],
-          ].map(([ic,title,desc])=>`
-            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border:.5px solid var(--bd);border-radius:8px">
-              <div style="width:30px;height:30px;background:var(--teal-l);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ${ic}" style="font-size:14px;color:var(--teal-d)"></i></div>
-              <div><div style="font-size:12px;font-weight:500;margin-bottom:2px">${title}</div><div style="font-size:11px;color:var(--tx2);line-height:1.5">${desc}</div></div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB: HOW TO FILE -->
-    <div class="kra-section ${activeKraTab==='file'?'on':''}" id="krat-file">
-      <div class="kra-grid">
-        <div class="kra-card">
-          <div class="kra-card-title"><i class="ti ti-list-numbers"></i> Step-by-Step Filing Guide</div>
-          <div>
-            ${[
-              ['Visit KRA iTax Portal','Go to <strong>itax.kra.go.ke</strong> and log in with your KRA PIN and password.',['Open iTax Portal','https://itax.kra.go.ke']],
-              ['Select Returns','Click on <strong>Returns</strong> in the top menu, then select <strong>"File Returns"</strong>.',''],
-              ['Choose Tax Obligation','Select <strong>"Rental Income Tax (RIT)"</strong> from the list of obligations. If not visible, you may need to register it first under "Registration > Rental Income".',''],
-              ['Enter Monthly Figures','Enter your <strong>gross rent collected</strong> for the month. The system calculates 7.5% automatically. Do NOT include outstanding/unpaid rent.',''],
-              ['Submit & Pay','Review the return, submit it, then pay the tax due via <strong>KRA Pay Bill 222222</strong> on M-Pesa using your KRA PIN as the account number.',''],
-              ['Save Acknowledgement','Download and save your <strong>filing acknowledgement</strong>. This is your proof of compliance.',''],
-            ].map(([title,body,link],i)=>`
-              <div class="kra-step">
-                <div class="kra-step-num">${i+1}</div>
-                <div>
-                  <div class="kra-step-title">${title}</div>
-                  <div class="kra-step-body">${body}</div>
-                  ${Array.isArray(link)&&link.length?`<a href="${link[1]}" target="_blank" rel="noopener" class="kra-step-link"><i class="ti ti-external-link" style="font-size:12px"></i> ${link[0]}</a>`:''}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-        <div>
-          <div class="kra-card" style="margin-bottom:14px">
-            <div class="kra-card-title"><i class="ti ti-device-mobile"></i> M-Pesa Payment Details</div>
-            <div style="background:var(--gray-50);border:.5px solid var(--bd);border-radius:var(--r);padding:14px">
-              <div class="kra-row"><span class="kra-row-lbl">Pay Bill No.</span><span class="kra-row-val" style="font-size:18px;font-family:monospace;color:var(--teal-d)">222222</span></div>
-              <div class="kra-row"><span class="kra-row-lbl">Account Number</span><span class="kra-row-val" style="font-family:monospace">Your KRA PIN (e.g. A003456789B)</span></div>
-              <div class="kra-row"><span class="kra-row-lbl">Amount</span><span class="kra-row-val tax">KES ${monthlyTax.toLocaleString()} /month (avg)</span></div>
-              <div class="kra-row"><span class="kra-row-lbl">Reference</span><span class="kra-row-val" style="font-size:12px">Month being filed (e.g. MAY2025)</span></div>
-            </div>
-            <div class="kra-alert kra-alert-ok" style="margin-top:12px;margin-bottom:0">
-              <i class="ti ti-check"></i>
-              <div>After paying via M-Pesa, go back to iTax and enter the <strong>M-Pesa confirmation code</strong> to complete your filing.</div>
-            </div>
-          </div>
-          <div class="kra-card" style="margin-bottom:14px">
-            <div class="kra-card-title"><i class="ti ti-alert-triangle"></i> Penalties for Late Filing</div>
-            <div class="kra-row"><span class="kra-row-lbl">Late filing penalty</span><span class="kra-row-val tax">5% of tax due</span></div>
-            <div class="kra-row"><span class="kra-row-lbl">Late payment interest</span><span class="kra-row-val tax">1% per month</span></div>
-            <div class="kra-row"><span class="kra-row-lbl">Example (1 month late)</span><span class="kra-row-val tax">KES ${Math.round(monthlyTax*0.06).toLocaleString()} extra</span></div>
-            <div style="font-size:12px;color:var(--tx2);margin-top:10px;line-height:1.6">Penalties accumulate monthly. File on time even if you cannot pay immediately — filing reduces the penalty.</div>
-          </div>
-          <div class="kra-card">
-            <div class="kra-card-title"><i class="ti ti-link"></i> Useful KRA Links</div>
-            ${[
-              ['iTax Portal (Login & File)','https://itax.kra.go.ke','ti-external-link'],
-              ['KRA Rental Income Guide','https://www.kra.go.ke/individual/filing-paying/types-of-taxes/rental-income-tax','ti-book'],
-              ['KRA Taxpayer Services','https://www.kra.go.ke/taxpayer-education','ti-school'],
-              ['Register KRA PIN','https://itax.kra.go.ke/KRA-Portal/','ti-id-badge-2'],
-              ['KRA Contact / Help Desk','https://www.kra.go.ke/contact-us','ti-headset'],
-            ].map(([label,url,icon])=>`
-              <a href="${url}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:.5px solid var(--bd);text-decoration:none;color:var(--tx);font-size:13px;transition:color .15s" onmouseover="this.style.color='var(--teal-d)'" onmouseout="this.style.color='var(--tx)'">
-                <i class="ti ${icon}" style="font-size:15px;color:var(--teal)"></i>
-                ${label}
-                <i class="ti ti-arrow-right" style="margin-left:auto;font-size:13px;color:var(--tx3)"></i>
-              </a>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+// ── Load landlord data from Supabase ────────────────────────
+async function loadLandlordDataFromDB(){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Loading your properties...');
+    const lid=DB_LANDLORD_ID;
+    if(!lid){ hideLoading(); return; }
+    // Load buildings
+    const dbBuildings = await RF.BuildingsDB.getByLandlord(lid);
+    if(dbBuildings){
+      // Merge into allBuildings
+      dbBuildings.forEach(b=>{
+        const exists=allBuildings.find(x=>x.id===b.id);
+        if(!exists) allBuildings.push(mapDbBuilding(b));
+        else Object.assign(exists, mapDbBuilding(b));
+      });
+    }
+    // Load tenants
+    const dbTenants = await RF.TenantsDB.getByLandlord(lid);
+    if(dbTenants){
+      dbTenants.forEach(t=>{
+        const exists=extraTenants.find(x=>x.id===t.id);
+        if(!exists) extraTenants.push(mapDbTenant(t));
+        else Object.assign(exists, mapDbTenant(t));
+      });
+    }
+    hideLoading();
+  }catch(e){
+    hideLoading();
+    console.error('DB load error:', e);
+    toast('Could not load from database — using local data');
+  }
 }
 
-function switchKraTab(tab){
-  activeKraTab=tab;
-  renderTax();
-  document.getElementById('kra-content').scrollIntoView({behavior:'smooth',block:'start'});
+// ── Map DB row → app format ─────────────────────────────────
+function mapDbBuilding(b){
+  return {
+    id: b.id, lid: b.landlord_id,
+    name: b.name, location: b.location,
+    totalUnits: b.total_units||0, yearBuilt: b.year_built,
+    type: b.building_type||'Apartments', color: 'bld-c1',
+    notes: b.notes||'', unitPrefixes:[b.name.split(' ').pop().slice(0,1)||'A'],
+    dbId: b.id,
+  };
+}
+function mapDbTenant(t){
+  const unit = t.units ? t.units.unit_number : t.unit_number || 'N/A';
+  const bldId = t.units?.buildings ? t.units.building_id : null;
+  const ini = t.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  const cols=['c0','c1','c2','c3','c4','c5'];
+  return {
+    id: t.id, lid: t.landlord_id, bldId,
+    name: t.name, email: t.email, phone: t.phone||'', idNo: t.id_number||'',
+    unit, rent: t.units?.monthly_rent||0, dueDay: 5,
+    status: 'pending', daysOver: 0, ini, col: cols[t.name.length%6],
+    moveIn: t.move_in_date||'', vacated: t.vacated_at||null,
+    empType: t.employment_type||'Employed', employer: t.employer_name||'',
+    income: t.monthly_income||0, bizType: t.business_type||'',
+    deposit: t.deposit_status||'pending', depositAmt: t.deposit_amount||0,
+    notes: t.notes||'', history:[], messages:[],
+    dbId: t.id,
+  };
 }
 
-function downloadTaxSummary(){
-  const yr=taxYear;
-  const annualGross=TAX_MONTHLY.reduce((s,m)=>s+m.collected,0);
-  const grossTax=Math.round(annualGross*0.075);
-  // Build a simple printable summary
-  const w=window.open('','_blank');
-  w.document.write(`<html><head><title>KRA Tax Summary ${yr}</title>
-  <style>body{font-family:Arial,sans-serif;padding:30px;color:#1a1a18;max-width:700px;margin:0 auto}
-  h1{color:#0F6E56;font-size:22px;margin-bottom:4px}
-  h2{font-size:15px;font-weight:600;margin:18px 0 8px;border-bottom:1px solid #eee;padding-bottom:5px}
-  table{width:100%;border-collapse:collapse;margin-bottom:14px}
-  th{background:#f4f3ef;padding:8px 10px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:#888}
-  td{padding:8px 10px;border-bottom:1px solid #f0f0f0;font-size:13px}
-  .total{font-weight:600;font-size:14px;color:#0F6E56}
-  .tax{font-weight:700;font-size:16px;color:#D85A30}
-  .footer{margin-top:28px;font-size:11px;color:#888;border-top:1px solid #eee;padding-top:12px}</style></head><body>
-  <h1>RentFlow — KRA Tax Summary</h1>
-  <p style="color:#888;font-size:13px">Generated ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})} &nbsp;|&nbsp; Tax Year: <strong>${yr}</strong></p>
-  <h2>Landlord Details</h2>
-  <table><tr><td>Name</td><td><strong>John Kariuki</strong></td></tr>
-  <tr><td>KRA PIN</td><td><strong>A003456789B</strong></td></tr>
-  <tr><td>Property</td><td>Sunrise Apartments, Kasarani</td></tr>
-  <tr><td>Tax Obligation</td><td>Residential Rental Income Tax (RRIT)</td></tr></table>
-  <h2>Annual Revenue — ${yr}</h2>
-  <table><tr><td>Gross Rent Collected</td><td class="total">KES ${annualGross.toLocaleString()}</td></tr>
-  <tr><td>Tax Rate (RRIT)</td><td>7.5% of gross</td></tr>
-  <tr><td>Annual Tax Due</td><td class="tax">KES ${grossTax.toLocaleString()}</td></tr>
-  <tr><td>Monthly Average Tax</td><td>KES ${Math.round(grossTax/12).toLocaleString()}</td></tr></table>
-  <h2>Monthly Breakdown</h2>
-  <table><tr><th>Month</th><th>Collected</th><th>Tax Due (7.5%)</th></tr>
-  ${TAX_MONTHLY.map((m,i)=>`<tr><td>${m.mo} ${yr}</td><td>KES ${m.collected.toLocaleString()}</td><td>KES ${Math.round(m.collected*0.075).toLocaleString()}</td></tr>`).join('')}
-  <tr><td><strong>TOTAL</strong></td><td class="total">KES ${annualGross.toLocaleString()}</td><td class="tax">KES ${grossTax.toLocaleString()}</td></tr></table>
-  <h2>Payment Instructions</h2>
-  <p>M-Pesa Paybill: <strong>222222</strong> &nbsp;|&nbsp; Account: <strong>Your KRA PIN</strong> &nbsp;|&nbsp; File by 20th of following month</p>
-  <p>iTax Portal: <strong>https://itax.kra.go.ke</strong></p>
-  <div class="footer">This document is generated by RentFlow for reference only. Always consult a certified tax advisor or KRA directly for official tax advice. RentFlow is not a tax filing service.</div>
-  </body></html>`);
-  w.document.close();
-  w.print();
+// ── CREATE BUILDING (DB + local) ────────────────────────────
+async function dbCreateBuilding(localBld){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Creating building...');
+    const result = await RF.BuildingsDB.create({
+      landlord_id: DB_LANDLORD_ID,
+      name: localBld.name,
+      location: localBld.location,
+      total_units: localBld.totalUnits,
+      year_built: localBld.yearBuilt,
+      building_type: localBld.type,
+      notes: localBld.notes,
+    });
+    if(result && result[0]){
+      // Update local id with real DB id
+      const local = allBuildings.find(b=>b.id===localBld.id);
+      if(local){ local.id=result[0].id; local.dbId=result[0].id; }
+      await RF.AuditDB.log(DB_LANDLORD_ID,'CREATE_BUILDING','buildings',result[0].id,{name:localBld.name});
+    }
+    hideLoading();
+  }catch(e){ hideLoading(); console.error('DB createBuilding error:',e); }
 }
+
+// ── UPDATE BUILDING (DB + local) ────────────────────────────
+async function dbUpdateBuilding(bldId, changes){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Updating building...');
+    await RF.BuildingsDB.update(bldId, {
+      name: changes.name, location: changes.location,
+      total_units: changes.totalUnits, year_built: changes.yearBuilt,
+      building_type: changes.type, notes: changes.notes,
+    });
+    hideLoading();
+  }catch(e){ hideLoading(); console.error('DB updateBuilding error:',e); }
+}
+
+// ── DELETE BUILDING (developer only) ────────────────────────
+async function dbDeleteBuilding(bldId){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Deleting building...');
+    await RF.BuildingsDB.delete(bldId);
+    await RF.AuditDB.log(DB_LANDLORD_ID,'DELETE_BUILDING','buildings',bldId,{});
+    hideLoading();
+  }catch(e){ hideLoading(); console.error('DB deleteBuilding error:',e); }
+}
+
+// ── CREATE TENANT (DB + local) ──────────────────────────────
+async function dbCreateTenant(localTenant, unitId){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Creating tenant account...');
+    const result = await RF.TenantsDB.create({
+      landlord_id: DB_LANDLORD_ID,
+      unit_id: unitId||null,
+      name: localTenant.name, email: localTenant.email,
+      phone: localTenant.phone, id_number: localTenant.idNo,
+      employment_type: localTenant.empType, employer_name: localTenant.employer,
+      monthly_income: localTenant.income, business_type: localTenant.bizType,
+      deposit_status: localTenant.deposit, deposit_amount: localTenant.depositAmt,
+      move_in_date: localTenant.moveIn, notes: localTenant.notes,
+    });
+    if(result && result[0]){
+      const local = extraTenants.find(t=>t.id===localTenant.id)||tenants.find(t=>t.id===localTenant.id);
+      if(local){ local.dbId=result[0].id; }
+      // Create initial payment record for current month
+      const month = new Date().toLocaleString('en-GB',{month:'short',year:'numeric'});
+      const year = new Date().getFullYear();
+      await RF.PaymentsDB.create({
+        tenant_id: result[0].id, landlord_id: DB_LANDLORD_ID,
+        billing_month: month, billing_year: year,
+        amount_due: localTenant.rent, amount_paid: 0, status: 'pending',
+        due_date: new Date(year, new Date().getMonth(), 5).toISOString().slice(0,10),
+      });
+      // Create Supabase auth user for tenant (requires service role key)
+      // Add this to your Vercel Edge Function / Supabase Edge Function:
+      //
+      // const { data, error } = await supabase.auth.admin.createUser({
+      //   email: tenantEmail,
+      //   password: tenantOTP,
+      //   email_confirm: true,   // skip email verification
+      //   user_metadata: { name: tenantName, role: 'tenant', landlord_id: landlordId }
+      // })
+      // Then save data.user.id as the tenant's auth_id in the tenants table
+      toast('Tenant saved to database!');
+    }
+    hideLoading();
+  }catch(e){ hideLoading(); console.error('DB createTenant error:',e); toast('Saved locally — DB sync pending'); }
+}
+
+// ── UPDATE TENANT (landlord edits phone, notes, etc.) ───────
+async function dbUpdateTenant(tenantId, changes){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Updating tenant...');
+    await RF.TenantsDB.update(tenantId, {
+      phone: changes.phone, employer_name: changes.employer,
+      employment_type: changes.empType, monthly_income: changes.income,
+      deposit_status: changes.deposit, deposit_amount: changes.depositAmt,
+      notes: changes.notes, id_number: changes.idNo,
+    });
+    hideLoading();
+    toast('Tenant details updated in database.');
+  }catch(e){ hideLoading(); console.error('DB updateTenant error:',e); }
+}
+
+// ── VACATE TENANT (DB + local) ──────────────────────────────
+async function dbVacateTenant(tenantId, unitId){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Processing vacate...');
+    await RF.TenantsDB.vacate(tenantId);
+    if(unitId) await RF.UnitsDB.setVacant(unitId, true);
+    hideLoading();
+  }catch(e){ hideLoading(); console.error('DB vacate error:',e); }
+}
+
+// ── DELETE TENANT (developer only) ──────────────────────────
+async function dbDeleteTenant(tenantId){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    showLoading('Deleting tenant...');
+    await RF.TenantsDB.delete(tenantId);
+    await RF.AuditDB.log(DB_LANDLORD_ID,'DELETE_TENANT','tenants',tenantId,{});
+    hideLoading();
+    toast('Tenant permanently deleted from database.');
+  }catch(e){ hideLoading(); console.error('DB deleteTenant error:',e); }
+}
+
+// ── MARK PAYMENT PAID ────────────────────────────────────────
+async function dbMarkPaid(tenantDbId, amount, method, ref){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    // Find the current month payment record
+    const payments = await RF.PaymentsDB.getByTenant(tenantDbId);
+    const month = new Date().toLocaleString('en-GB',{month:'short',year:'numeric'});
+    const current = payments?.find(p=>p.billing_month===month);
+    if(current){
+      await RF.PaymentsDB.markPaid(current.id, amount, method, ref);
+    } else {
+      // Create and mark paid in one step
+      await RF.PaymentsDB.create({
+        tenant_id: tenantDbId, landlord_id: DB_LANDLORD_ID,
+        billing_month: month, billing_year: new Date().getFullYear(),
+        amount_due: amount, amount_paid: amount, status: 'paid',
+        payment_method: method, payment_ref: ref,
+        paid_at: new Date().toISOString(),
+      });
+    }
+  }catch(e){ console.error('DB markPaid error:',e); }
+}
+
+// ── SEND MESSAGE (DB) ────────────────────────────────────────
+async function dbSendMessage(tenantId, landlordId, fromRole, text, type){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    await RF.MessagesDB.send({ tenant_id:tenantId, landlord_id:landlordId, from_role:fromRole, message:text, message_type:type });
+  }catch(e){ console.error('DB sendMessage error:',e); }
+}
+
+// ── SUBMIT OVERRIDE REQUEST ──────────────────────────────────
+async function dbSubmitOverride(type, tenantId, detail){
+  if(!DB_ENABLED||!window.RF) return;
+  try{
+    await RF.OverridesDB.create({ landlord_id:DB_LANDLORD_ID, request_type:type, tenant_id:tenantId, detail });
+    toast('Request sent to developer.');
+  }catch(e){ console.error('DB override error:',e); }
+}
+
 // ═══════════ NOTIFICATIONS ═══════════
 // Separate stores: landlord sees operational alerts; tenants see only
 // their own relevant events (vacancies, landlord messages, unit changes)
@@ -3694,6 +4438,7 @@ function saveToStorage(){
       extraTenants: extraTenants.filter(t=>t.lid===lid),
       extraVacants: extraVacants.filter(v=>v.lid===lid),
       allBuildings_ll5: allBuildings.filter(b=>b.lid===lid),
+      expenses_ll5: expenses.filter(e=>!e.lid||e.lid===lid),
       savedAt: new Date().toISOString()
     };
     localStorage.setItem(LS_KEY+'_'+lid, JSON.stringify(payload));
@@ -3723,6 +4468,12 @@ function loadFromStorage(){
       const existingIds = new Set(allBuildings.map(b=>b.id));
       data.allBuildings_ll5.forEach(b=>{
         if(!existingIds.has(b.id)) allBuildings.push(b);
+      });
+    }
+    if(data.expenses_ll5 && data.expenses_ll5.length){
+      const existingIds = new Set(expenses.map(e=>e.id));
+      data.expenses_ll5.forEach(e=>{
+        if(!existingIds.has(e.id)) expenses.push(e);
       });
     }
     console.log('RentFlow: loaded saved data for Alphonce from storage.');
@@ -4097,21 +4848,14 @@ function saveEditLandlord() {
 }
 
 function openDelLandlord(id) {
-  pendingDelLLId = id;
+  // Route to permanent delete (developer only)
   const l = landlords.find(x => x.id === id);
-  document.getElementById('del-ll-info').innerHTML = l ? `<strong style="color:white">${l.name}</strong><br>${l.property} · ${l.location}<br>${l.email} · Joined ${l.joined}` : '';
-  devOpenM('delLandlord');
+  if(l) openPermDelLandlord(id, l.name, l.property+' · '+l.location);
 }
 
 function confirmDelLandlord() {
-  const l = landlords.find(x => x.id === pendingDelLLId);
-  if (l) {
-    addAuditEntry('ad-r', 'Landlord account removed: ' + l.name + ' (' + l.property + ')');
-    l.status = 'inactive';
-  }
+  // Legacy — now handled by execPermDelLandlord
   devCloseM('delLandlord');
-  renderDevLandlords(); renderDevStats();
-  devToast('Landlord account deactivated. Data retained for 90 days.');
 }
 
 // ── OVERRIDE TENANT (DEV DIRECT EDIT) ──
